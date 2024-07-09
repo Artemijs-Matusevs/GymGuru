@@ -61,16 +61,75 @@
     gap: 15px;
 }
 
-.form-container form a{
-    text-align: right;
-    color: white;
-    width: 100%;
-    text-decoration: none;
+.form-container form h2{
+    color: #efc918;
+    font-size: 50px;
+    margin-bottom: 50px;
 }
 
+.form-container form a{
+    text-align: right;
+    color: #6d798c;
+    width: 100%;
+    text-decoration: none;
+    margin-top: -25px;
+    margin-bottom: 25px;
+}
 
+input{
+    width: 300px;
+    height: 25px;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 2px 2px 10px #6d798c;
+    padding: 10px;
+    background-color: transparent;
+    color: #6d798c;
+}
 
+.submitButton{
+    border-radius: 5%;
+    color: #6d798c;
+    width: 150px;
+    height: 45px;
+}
 
+.submitButton:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: #6d798c;
+    color: #2a2a30;
+}
+
+/* Socials */
+.socials ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    gap: 50px;
+    font-size: 50px;
+    color: #6d798c;
+}
+
+.socials ul li:hover{
+    cursor: pointer;
+}
+
+.socials-writing{
+    color: #6d798c;
+    margin-top: 50px;
+}
+
+.register-button{
+    position: absolute;
+    bottom: 10px;
+    color: #efc918;
+}
+
+.register-button:hover{
+    cursor: pointer;
+}
 
 .copyright{
     position: absolute;
