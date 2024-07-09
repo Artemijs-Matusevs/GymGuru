@@ -1,0 +1,16 @@
+{
+  "name": "gymguru",
+  "version": "1.0.0",
+  "description": "Gym Web-Application for tracking progress, creating work-out routines and tracking calories",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artemijs Matusevs",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}
