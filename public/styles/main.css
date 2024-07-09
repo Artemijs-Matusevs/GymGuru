@@ -31,14 +31,50 @@
 
 .title{
     color: #efc918;
-    font-size: 60px;
+    font-size: 80px;
     margin-bottom: 65vh;
+    text-shadow: -1px 0 5px #2a2a30, 0 1px 5px #2a2a30, 1px 0 5px #2a2a30, 0 -1px 5px #2a2a30;
 }
 
+.title-underline{
+    text-decoration: underline #efc918;
+    text-underline-offset: 15px;
+}
+
+/* Log in/register styling section */
 .right{
     background-color: #2a2a30;
     width: 100%;
     height: 100%;
     flex: 2;
     box-shadow: -10px 0 20px #2a2a30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.form-container form a{
+    text-align: right;
+    color: white;
+    width: 100%;
+    text-decoration: none;
+}
+
+
+
+
+
+.copyright{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #efc918;
 }
