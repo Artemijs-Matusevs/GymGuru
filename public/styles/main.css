@@ -20,9 +20,25 @@
     flex: 1;
 }
 
+.transparent-panel{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    color: #efc918;
+    font-size: 60px;
+    margin-bottom: 65vh;
+}
+
 .right{
-    background-color: blue;
+    background-color: #2a2a30;
     width: 100%;
     height: 100%;
     flex: 2;
+    box-shadow: -10px 0 20px #2a2a30;
 }
