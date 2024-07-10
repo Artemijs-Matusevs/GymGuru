@@ -118,8 +118,10 @@ input{
 
 .socials-writing{
     color: #6d798c;
-    margin-top: 50px;
+    margin-top: 25px;
 }
+
+/* Login/Register buttons */
 
 .register-button{
     position: absolute;
@@ -129,6 +131,11 @@ input{
 
 .register-button:hover{
     cursor: pointer;
+}
+
+/* Hide the register form container to start */
+#register-form{
+    display: none;
 }
 
 .copyright{

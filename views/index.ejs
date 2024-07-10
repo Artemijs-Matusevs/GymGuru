@@ -17,6 +17,7 @@
             </div>
         </div>
         <div class="right">
+            <!-- LOGIN FORM -->
             <div id="login-container" class="form-container">
                 <form action="/login" method="post">
                     <h2> Login </h2>
@@ -31,11 +32,57 @@
                             <li><ion-icon name="logo-google"></ion-icon></li>
                         </ul>
                     </div>
-                    <p class="register-button"> Register </p>
+                    <p id="register-button" class="register-button"> Register </p>
                 </form>
             </div>
+
+            <!-- REGISTER FORM -->
+             <div id="register-form" class="form-container">
+                <form action ="/register" method="post">
+                    <h2> Register </h2>
+                    <input required name="full_name" type="text" placeholder="Full Name*">
+                    <input required name="email" type="email" placeholder="Email*">
+                    <input required name="username" type="text" placeholder="Username*">
+                    <input required name="password" type="password" placeholder="Password*">
+                    <input required name="password" type="password" placeholder="Confirm Password*">
+                    <input class="submitButton" type="submit">
+                    <p class="socials-writing"> Or Login/Sign-Up Using </p>
+                    <div class="socials">
+                        <ul>
+                            <li><ion-icon name="logo-facebook"></ion-icon></li>
+                            <li><ion-icon name="logo-google"></ion-icon></li>
+                        </ul>
+                    </div>
+                    <p id="login-button" class="register-button"> Login </p>
+                </form>
+             </div>
+
+             <!-- COPYRIGHT LOGO -->
             <h3 class="copyright"> © Artemijs Thomas Matusevs. </h3>
         </div>
     </div>
 </body>
+
+<script>
+    //Get hold of login/register form containers and buttons
+    const login_container = document.querySelector('#login-container');
+    const login_button = document.querySelector('#login-button');
+    const register_container = document.querySelector('#register-form');
+    const register_button = document.querySelector('#register-button');
+
+    //Add click event listener on the register button to switch the two form containers
+    register_button.addEventListener("click", () => {
+        login_container.style.display = "none";
+        register_container.style.display = "flex";
+    })
+
+    login_button.addEventListener("click", () => {
+        login_container.style.display = "flex";
+        register_container.style.display = "none";
+    })
+
+
+
+</script>
+
 </html>
