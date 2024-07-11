@@ -1,4 +1,18 @@
 import express from "express";
+import pg from "pg";
+import env from "dotenv";
+
+//Initialize enviromental variables file
+env.config();
+
+//Set up/connect to database
+const db = new pg.Client({
+    user: "username",
+    host: "localhost",
+    database: "GymGuru",
+    password: process.env.DATABASE_PASSWORD,
+    port: 5432,
+});
 
 const app = express();
 const port = 3000;
