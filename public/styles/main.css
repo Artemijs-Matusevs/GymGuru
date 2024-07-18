@@ -75,13 +75,18 @@
     margin-bottom: 50px;
 }
 
-.form-container form a{
+.password-reset{
     text-align: right;
     color: #6d798c;
     width: 100%;
     text-decoration: none;
     margin-top: -25px;
     margin-bottom: 25px;
+}
+
+.socials-logo{
+    text-decoration: none;
+    color: #6d798c;
 }
 
 input{
