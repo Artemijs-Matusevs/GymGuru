@@ -25,16 +25,16 @@ db.connect();//Connect to the database
 
 
 //Setting up middleware
-app.use(express.static("public"));
-
+app.use(express.static("public"));//Set up static folder
+//Set up express-session
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
 }))
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize());//Initialize passport
+app.use(passport.session());//Initialize session
 
 // --- End points ---
 app.get("/", (req, res) => {
@@ -56,7 +56,11 @@ app.get("/auth/google/dashboard", passport.authenticate("google", {
 
 app.get("/dashboard", (req, res) => {
     //console.log(req.user);
-    res.send(req.user.email);
+    if (req.isAuthenticated()) {
+        res.send(req.user.email);
+    }else {
+        res.redirect("/");
+    }
 })
 
 // log-out endpoint
