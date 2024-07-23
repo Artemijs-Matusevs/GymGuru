@@ -25,3 +25,17 @@
 - `src/utils`: placeholder for any utility functions/helpers
 
 - `app.js`: main entry point of the web-app
+
+
+
+# The original template:
+1) `src` folder contains all application-related code.
+	1) `config` folder contains configuration files and environment set up.
+	2) `controllers` folder handles incoming HTTP requests and delegates to services.
+	3) `models` folder contains database models or data access logic.
+	4) `routes` folder defines application routes and maps them to controllers.
+	5) `services` folder contains the business logic and interacts with the data (model) layer.
+	6) `middlewares` folder contains custom middleware functions.
+	7) `utils` folder contains utility functions and helpers. 
+	8) `views` contains templating files EJS etc...
+2) `public` folder contains static files e.g. CSS, JavaScript, images etc...

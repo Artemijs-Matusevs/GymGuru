@@ -4,11 +4,11 @@
   "description": "Gym Web-Application for tracking progress, creating work-out routines and tracking calories",
   "main": "app.js",
   "type": "module",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Artemijs Matusevs",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
