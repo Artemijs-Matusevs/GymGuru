@@ -1,3 +1,4 @@
+//HANDLE REGISTER ROUTES
 import express from 'express';
 import registerController from '../controllers/registerController.js';
 

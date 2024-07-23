@@ -15,6 +15,7 @@ const findUserById = async (id) => {
     return result.rows[0];
 };
 
+
 //exports
 export default{
     findUserByEmail,

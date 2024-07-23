@@ -1,8 +1,10 @@
+import registerService from '../services/registerService.js';
+
 const registerController = {
     
     //New local account
     newLocalUser: (req, res) => {
-        console.log(req.body.full_name);
+        registerService.newLocalUser(req.body);   
     }
 }
 
