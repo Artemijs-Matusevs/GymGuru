@@ -1,3 +1,6 @@
+# Sprint Board
+https://app.asana.com/0/1207890932367425/1207890932367425
+
 # Folder Structure
 
 - `src/config`:
@@ -6,6 +9,7 @@
 
 - `src/controllers`:
     - `authController.js`: Handles authentication-related HTTP requests.
+    - `registerController.js`: Handles local register HTTP request.
     - `userController.js`: Handles user-related HTTP requests.
 
 - `src/models`:
@@ -14,13 +18,16 @@
 - `src/routes`:
     - `index.js`: handles the root route.
     - `auth.js`: Handles authentication related routes.
+    - `register.js`: Handles local register route.
 
 - `src/services`:
-    - `authService.js`: Contains business logic related to authentication and user management
-    - `userService.js`: placeholder for additional user related logic
+    - `authService.js`: Contains business logic related to authentication and user management.
+    - `userService.js`: placeholder for additional user related logic.
+    - `registerService.js`: Contains busniess logic related to the local registration.
 
 - `src/middlewares`:
     - `session.js`: handles express-session start up/config
+    - `bodyParser.js`: handles body-parser start up/config
 
 - `src/utils`: placeholder for any utility functions/helpers
 

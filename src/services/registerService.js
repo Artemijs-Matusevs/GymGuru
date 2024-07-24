@@ -20,10 +20,10 @@ const newLocalUser = async (profile) => {
             console.log("New user");
         } else{
             //USER ALREADY EXISTS
-            console.log("User exists");
+            return("user exists");
         }
-    } else{//No match
-        console.log("Passwords don't match");
+    } else{//Passwords don't match
+        return("no match");
     }
 }
 
