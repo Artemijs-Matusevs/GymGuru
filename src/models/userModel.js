@@ -5,8 +5,8 @@ const findUserByEmail = async (email) => {
     return result.rows[0];
 };
 
-const createUser = async (email, password) => {
-    const result = await db.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", [emali, password]);
+const createUser = async (full_name, email, username, password) => {
+    const result = await db.query("INSERT INTO users (full_name, email, username, password) VALUES ($1, $2, $3, $4) RETURNING *", [full_name, email, username, password]);
     return result.rows[0];
 };
 

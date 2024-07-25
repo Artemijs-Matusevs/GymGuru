@@ -4,7 +4,9 @@ import userModel from '../models/userModel.js';
 const newGoogleUser = async (profile) => {
     let user = await userModel.findUserByEmail(profile.email);
     if (!user) {
-        user = await userModel.createUser(profile.email, 'google');
+        let name = profile.given_name + " " + profile.family_name;//Get full name
+        user = await userModel.createUser(name, profile.email, 'google', 'google');
+        //console.log(profile);
     }
     return user;
 }
