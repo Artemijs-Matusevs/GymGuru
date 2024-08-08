@@ -25,6 +25,14 @@ async (accessToken, refreshTokn, profile, cb) => {
     }
 }))
 
+//Configure local strategy module
+/*passport.use(new Strategy(async function verify(username, password, cb) {
+    try {
+
+    }
+}))*/
+
+
 
 
 //serialize and deserialize user
