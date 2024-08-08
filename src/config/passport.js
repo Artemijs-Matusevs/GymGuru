@@ -1,5 +1,6 @@
 import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
+import GoogleStrategy from "passport-google-oauth2";
+import { Strategy } from "passport-local";
 import authService from '../services/authService.js';
 import dotenv from 'dotenv';
 
@@ -25,12 +26,26 @@ async (accessToken, refreshTokn, profile, cb) => {
     }
 }))
 
-//Configure local strategy module
-/*passport.use(new Strategy(async function verify(username, password, cb) {
-    try {
+//Configure local strategy
+passport.use(new Strategy(async function verify(email, password, cb) {
+    try{
+        //See if user with that email exists
+        const user = await authService.findUserByEmail(email);
+        if (!user) {
+            return cb(null, false, { message: "Incorrect username." });
+        }
 
+        //Validate password
+        const validPassword = await authService.verifyPassword(user, password);
+        if (!validPassword) {
+            return cb(null, false, {message: "Incorrect password."});
+        }
+
+        return cb(null, user);
+    } catch (err) {
+        return cb(err);
     }
-}))*/
+}));
 
 
 
