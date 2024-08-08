@@ -9,7 +9,7 @@ router.get('/auth/google/dashboard', authController.googleCallback);
 router.get('/logout', authController.logout);
 router.get('/dashboard', authController.dashboard);
 
-//Post to register route
 router.post('/register', authController.newLocalUser);
+router.post("/local/Login", authController.localAuth);
 
 export default router;
