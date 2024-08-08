@@ -5,7 +5,6 @@ import sessionMiddleware from './src/middlewares/session.js';
 import bodyParserMiddleware from './src/middlewares/bodyParser.js';
 import indexRoutes from './src/routes/index.js';
 import authRoutes from './src/routes/auth.js';
-import registerRoutes from './src/routes/register.js';
 
 dotenv.config();
 
@@ -20,9 +19,9 @@ app.use(bodyParserMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Routes
 app.use('/', indexRoutes);
 app.use('/', authRoutes);
-app.use('/', registerRoutes);
 
 //Start the server
 app.listen(port, () => {

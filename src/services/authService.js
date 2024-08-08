@@ -1,4 +1,5 @@
 import userModel from '../models/userModel.js';
+import bcrypt from "bcrypt";
 
 //new google user
 const newGoogleUser = async (profile) => {
@@ -13,13 +14,31 @@ const newGoogleUser = async (profile) => {
 }
 
 //new local user
-const newLocalUser = async (full_name, email, password) => {
-    let user = await userModel.findUserByEmail(email);
-    if (!user) {
-        //Create new user here
+const newLocalUser = async (profile) => {
+    let user = await userModel.findUserByEmail(profile.email);
+
+    if(user){
+        return("user exists");
+    }else if(!comparePasswords(profile.password)){
+        return("no match");
+    }else{
+        //CREATE USER HERE
+        //console.log(profile);
+
+        //Hash the password
+        const saltRounds = 10;
+        const password = profile.password[0];
+
+        bcrypt.hash(password, saltRounds, async (err, hash) => {
+            if (err) {
+                console.error("Error hashing password:", err);
+            } else {
+                //Store in the users table
+                await userModel.createUser(profile.full_name, profile.email, hash);
+            }
+        })
     }
-    return user;
-}
+};
 
 //Find user by ID
 const getUserById = async (id) => {
@@ -29,11 +48,15 @@ const getUserById = async (id) => {
 //Find user by email
 const findUserByEmail = async (email) => {
     return await userModel.findUserByEmail(email);
-}
+};
 
 //Verify password
 const verifyPassword = async (user, password) => {
+};
 
+//Compare passwords
+const comparePasswords = (passwords) => {
+    return passwords[0] === passwords[1];
 };
 
 //exports
