@@ -27,24 +27,33 @@ async (accessToken, refreshTokn, profile, cb) => {
 }))
 
 //Configure local strategy
-passport.use(new Strategy(async function verify(email, password, cb) {
-    try{
-        //See if user with that email exists
-        const user = await authService.findUserByEmail(email);
-        if (!user) {
-            return cb(null, false, { message: "Incorrect username." });
-        }
+passport.use(new Strategy( 
+    {
+        usernameField: 'email',
+        passwordField: 'password',
+    },
+ 
+    async function verify(email, password, cb) {
+        try{
+            //See if user with that email exists
+            const user = await authService.findUserByEmail(email);
+            //console.log(user);
 
-        //Validate password
-        const validPassword = await authService.verifyPassword(user, password);
-        if (!validPassword) {
-            return cb(null, false, {message: "Incorrect password."});
-        }
+            if (!user) {
+                return cb(null, false, { message: "Incorrect username." });
+            }
 
-        return cb(null, user);
-    } catch (err) {
-        return cb(err);
-    }
+            //Validate password
+            const validPassword = await authService.verifyPassword(user, password);
+            console.log(validPassword);
+            if (!validPassword) {
+                return cb(null, false, {message: "Incorrect password."});
+            }
+
+            return cb(null, user);
+        } catch (err) {
+            return cb(err);
+        }
 }));
 
 

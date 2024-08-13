@@ -1,6 +1,9 @@
 import userModel from '../models/userModel.js';
 import bcrypt from "bcrypt";
 
+//bcrypt variables
+const saltRounds = 10;
+
 //new google user
 const newGoogleUser = async (profile) => {
     //Check to see if the email already exists
@@ -26,7 +29,6 @@ const newLocalUser = async (profile) => {
         //console.log(profile);
 
         //Hash the password
-        const saltRounds = 10;
         const password = profile.password[0];
 
         bcrypt.hash(password, saltRounds, async (err, hash) => {
@@ -52,6 +54,14 @@ const findUserByEmail = async (email) => {
 
 //Verify password
 const verifyPassword = async (user, password) => {
+    try {
+        //Compare the provided password with stored hash
+        const match = await bcrypt.compare(password, user.password);
+        return match;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
 };
 
 //Compare passwords
