@@ -9,7 +9,6 @@ https://app.asana.com/0/1207890932367425/1207890932367425
 
 - `src/controllers`:
     - `authController.js`: Handles authentication-related HTTP requests.
-    - `registerController.js`: Handles local register HTTP request.
     - `userController.js`: Handles user-related HTTP requests.
 
 - `src/models`:
@@ -18,12 +17,10 @@ https://app.asana.com/0/1207890932367425/1207890932367425
 - `src/routes`:
     - `index.js`: handles the root route.
     - `auth.js`: Handles authentication related routes.
-    - `register.js`: Handles local register route.
 
 - `src/services`:
     - `authService.js`: Contains business logic related to authentication and user management.
     - `userService.js`: placeholder for additional user related logic.
-    - `registerService.js`: Contains busniess logic related to the local registration.
 
 - `src/middlewares`:
     - `session.js`: handles express-session start up/config

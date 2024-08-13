@@ -46,6 +46,7 @@ passport.use(new Strategy(
             //Validate password
             const validPassword = await authService.verifyPassword(user, password);
             console.log(validPassword);
+            
             if (!validPassword) {
                 return cb(null, false, {message: "Incorrect password."});
             }
