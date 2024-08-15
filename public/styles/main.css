@@ -13,6 +13,7 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    background-color: #2a2a30;
 }
 
 .left{
@@ -162,12 +163,66 @@ input{
 
 
 /* DASHBOARD STYLING */
+
+/* NAV */
 .nav-bar{
     flex: 1;
+    background-color: #232830;
+    color: #efc818de;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding: 60px 25px;
+    gap: 50px;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    box-shadow: 2px 2px 20px #232830;
+    z-index: 1;
+}
+
+.nav-bar ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 40%;
+}
+
+.nav-bar ul li{
+    list-style: none;
+    font-size: 19px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-bar ul li:hover{
+    cursor: pointer;
+    color: white;
+}
+
+.sign-out-button{
+    position: relative;
+    top: 42vh;
+}
+
+.dashboard-title{
+    font-size: 30px;
+    text-shadow: -1px 0 5px #2a2a30, 0 1px 5px #2a2a30, 1px 0 5px #2a2a30, 0 -1px 5px #2a2a30;
+    font-family: "Anton SC", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .main-dash{
     flex: 6;
+    background-color: #2a2a30;
 }
 
 /* Main content of dash */
