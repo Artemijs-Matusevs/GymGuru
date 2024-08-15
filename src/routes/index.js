@@ -5,7 +5,7 @@ import authController from '../controllers/authController.js';
 const router = express.Router();
 
 router.get('/', (req, res) =>{
-    res.render('index.ejs');
+    res.render('dashboard.ejs');
 });
 
 export default router;
