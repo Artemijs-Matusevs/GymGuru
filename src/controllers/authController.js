@@ -62,7 +62,8 @@ const authController = {
     //Authenticate protect dashboard
     dashboard: (req, res) => {
         if (req.isAuthenticated()) {
-            res.send(req.user.email);
+            //res.send(req.user.email);
+            res.render("dashboard.ejs");
         }else {
             res.redirect("/");
         }

@@ -157,3 +157,15 @@ input{
     right: 5px;
     color: #efc918;
 }
+
+
+
+
+/* DASHBOARD STYLING */
+.nav-bar{
+    flex: 1;
+}
+
+.main-grid{
+    flex: 6;
+}

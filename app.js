@@ -11,7 +11,6 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-
 //Static files and middleware
 app.use(express.static('public'));
 app.use(sessionMiddleware);
