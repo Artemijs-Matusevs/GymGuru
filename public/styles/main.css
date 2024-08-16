@@ -175,8 +175,8 @@ input{
     flex-direction: column;
     padding: 60px 25px;
     gap: 50px;
-    border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%;
+    border-top-right-radius: 3%;
+    border-bottom-right-radius: 3%;
     box-shadow: 2px 2px 20px #232830;
     z-index: 1;
 }
@@ -237,13 +237,21 @@ input{
     height: 70vh;
     justify-content: center;
     align-items: center;
-    gap: 100px;
+    gap: 75px;
 }
 
 .box{
-    width: 450px;
-    height: 40vh;
-    outline: solid;
+    width: 35vw;
+    height: 50vh;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    background-color: rgb(219, 219, 219);
+    border-radius: 3%;
+    box-shadow: 0 2px 5px grey;
+    box-sizing: border-box;
+    color: #3B4450;
+    padding: 50px;
 }
 
 
