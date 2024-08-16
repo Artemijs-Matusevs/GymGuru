@@ -13,7 +13,7 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    background-color: #2a2a30;
+    background-color: lightgrey;
 }
 
 .left{
@@ -209,6 +209,10 @@ input{
     top: 42vh;
 }
 
+.active-button{
+    color: white;
+}
+
 .dashboard-title{
     font-size: 30px;
     text-shadow: -1px 0 5px #2a2a30, 0 1px 5px #2a2a30, 1px 0 5px #2a2a30, 0 -1px 5px #2a2a30;
@@ -222,7 +226,8 @@ input{
 
 .main-dash{
     flex: 6;
-    background-color: #2a2a30;
+    /*background-color: #2a2a30;*/
+    background-color: lightgrey;
 }
 
 /* Main content of dash */
@@ -241,10 +246,38 @@ input{
     outline: solid;
 }
 
-.footer{
-    height: 15vh;
-}
 
+/* DASHBORD BANNER STYLING */
 .banner{
     height: 15vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.text-highlight{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+}
+
+/* DASHBOARD FOOTER STYLING */
+.footer{
+    height: 15vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.banner h1, .footer h1{
+    color: #2a2a30;
+    font-size: 30px;
+}
+
+
+.dashboard-copyright{
+    color: #2a2a30;
 }
