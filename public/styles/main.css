@@ -168,10 +168,10 @@ input{
 .nav-bar{
     flex: 1;
     background-color: #23201E;
-    color: #F0D24B;
+    color: #F2F2F2;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     flex-direction: column;
     padding: 60px 25px;
     gap: 50px;
@@ -197,42 +197,69 @@ input{
 
 .nav-bar ul li:hover{
     cursor: pointer;
-    color: #F2F2F2;
+    color: #F0D24B;
 }
 
 .sign-out-button{
-    position: relative;
-    top: 42vh;
     background-color: #F9D84A;
     color: #23201E;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 6vh;
+    height: 8vh;
+    width: 12vw;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .sign-out-button:hover{
     background-color: #F2F2F2;
-    color: #23201E !important;
+    color: #23201E;
+    cursor: pointer;
 }
 
 .active-button{
+    color: #F0D24B;
+}
+
+.dashboard-title-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    height: 75vh;
+}
+
+.slogan-container{
+    text-align: right;
     color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 23px;
+    border-right: solid;
+    border-color: #F0D24B;
+    text-shadow: -1px 0 5px #2a2a30, 0 1px 5px #2a2a30, 1px 0 5px #2a2a30, 0 -1px 5px #2a2a30;
+    font-style: italic;
+    padding: 0 5px;
+}
+
+h2{
+    font-weight: 500;
 }
 
 .dashboard-title{
-    font-size: 30px;
+    font-size: 45px;
     text-shadow: -1px 0 5px #2a2a30, 0 1px 5px #2a2a30, 1px 0 5px #2a2a30, 0 -1px 5px #2a2a30;
     font-family: "Anton SC", sans-serif;
     font-weight: 400;
     font-style: normal;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     color: #F0D24B;
 }
+
 
 .main-dash{
     flex: 6;
@@ -260,7 +287,6 @@ input{
     flex-direction: column;
     padding: 50px;
     gap: 50px;
-    font-style: italic;
 }
 
 .left-box{
