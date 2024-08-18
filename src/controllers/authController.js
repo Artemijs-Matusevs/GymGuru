@@ -59,13 +59,12 @@ const authController = {
         })
     },
 
-    //Authenticate protect dashboard
-    dashboard: (req, res) => {
+    //Middleware to protect routes
+    isAuthenticated: (req, res, next) => {
         if (req.isAuthenticated()) {
-            //res.send(req.user.email);
-            res.render("dashboard.ejs");
-        }else {
-            res.redirect("/");
+            return next();
+        }else{
+            res.redirect('/');
         }
     }
 };

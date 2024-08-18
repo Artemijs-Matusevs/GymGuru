@@ -8,6 +8,10 @@
     margin: 0;
 }
 
+a{
+    text-decoration: none;
+}
+
 /* Main body for the sign-in page */
 .main-body{
     width: 100vw;
@@ -368,9 +372,14 @@ h2{
     font-weight: bold;
 }
 
+.welcome-message p{
+    text-align: center;
+}
+
 .welcome-message-underline{
     text-decoration: underline;
     text-underline-offset: 7px;
+    display: block;
 }
 
 .extra-date-box{

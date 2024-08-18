@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="sign-out-button"> Sign-Out </div>
+            <a href="/logout"><div class="sign-out-button"> Sign-Out </div></a>
         </div>
 
         <div class="main-dash">
@@ -39,8 +39,8 @@
                 </div>
 
                 <div class="date-box">
-                    <div class="date"> <h1> 16 </h1> <h2> Aug </h2> </div>
-                    <div class="welcome-message"> <p> G<span class="welcome-message-underline">ood Morning, Tom </span></p> </div>
+                    <div class="date"> <h1> <%=date%> </h1> <h2> <%=month%> </h2> </div>
+                    <div class="welcome-message"> <p> Good Morning, <span class="welcome-message-underline"> <%=name%> </span></p> </div>
                     <div class="extra-date-box"></div>
                 </div>
             </div>
@@ -48,11 +48,9 @@
             <div class="dash-flex-container"> 
                 <div class="box left-box">
                     <ion-icon class="placement-icons" name="pie-chart-outline"></ion-icon>
-                    <h1> Calories Track  </h1>
                 </div>
                 <div class="box right-box">
                     <ion-icon class="placement-icons" name="stats-chart-outline"></ion-icon>
-                    <h1> Workouts per week </h1>
                 </div>
             </div>
 
