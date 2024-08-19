@@ -9,7 +9,28 @@ const dashboardController = {
         let month = dashboardService.getMonthText(date.getMonth());
 
         res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month});
+    },
+
+    dashboardMain: (req, res) => {
+        res.render("dashboard-main.ejs");
+    },
+     
+    workout: (req, res) => {
+        res.render("workout.ejs");
+    },
+
+    history: (req, res) => {
+        res.render("history.ejs");
+    },
+
+    calories: (req, res) => {
+        res.render("calories.ejs");
+    },
+
+    measurements: (req, res) => {
+        res.render("measurements.ejs");
     }
+    
 }
 
 

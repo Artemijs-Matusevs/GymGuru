@@ -28,15 +28,15 @@
         <div class="main-dash">
 
             <div class="banner">
-                <div class="nav-bar">
+                <nav class="nav-bar">
                     <ul>
-                        <li class="active-button"> Dashboard </li>
-                        <li> Workout </li>
-                        <li> History </li>
-                        <li> Calories </li>
-                        <li> Measurements </li>
+                        <li><a href="#" data-page="dashboard-main"> Dashboard </a></li>
+                        <li><a href="#" data-page="workout"> Workout </a></li>
+                        <li><a href="#" data-page="history"> History</a></li>
+                        <li><a href="#" data-page="calories"> Calories</a></li>
+                        <li><a href="#" data-page="measurements"> Measurements</a></li>
                     </ul>
-                </div>
+                </nav>
 
                 <div class="date-box">
                     <div class="date"> <h1> <%=date%> </h1> <h2> <%=month%> </h2> </div>
@@ -45,13 +45,8 @@
                 </div>
             </div>
 
-            <div class="dash-flex-container"> 
-                <div class="box left-box">
-                    <ion-icon class="placement-icons" name="pie-chart-outline"></ion-icon>
-                </div>
-                <div class="box right-box">
-                    <ion-icon class="placement-icons" name="stats-chart-outline"></ion-icon>
-                </div>
+            <div id="content" class="dash-flex-container"> 
+                <!-- FETCH CONTENT FROM EJS PARTIALS -->
             </div>
 
             <h3 class="copyright dashboard-copyright"> © Artemijs Thomas Matusevs. </h3>
@@ -59,6 +54,38 @@
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('nav ul li a');
+            const content = document.getElementById('content');
+
+            links.forEach(link => {
+
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const page = this.getAttribute('data-page');
+
+                    fetch(`/${page}`)
+                    .then(response => {
+                        console.log(response);
+                        return response.text();
+                    })
+                    .then(html => {
+                        content.innerHTML = html;
+                    })
+                    .catch(err => console.error('Error loading page:', err));
+                });
+            });
+        });
+
+        //Load the default page
+        fetch('/dashboard-main')
+        .then(response => response.text())
+        .then(html => {
+            content.innerHTML = html;
+        })
+    </script>
     
 </body>
 </html>
