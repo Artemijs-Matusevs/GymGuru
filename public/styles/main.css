@@ -189,7 +189,6 @@ input{
 .nav-bar{
     align-self: start;
     margin-top: 4vh;
-    color: #F2F2F2;
     font-family: "Anton SC", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -211,7 +210,11 @@ input{
     align-items: center;
 }
 
-.nav-bar ul li:hover{
+.nav-bar ul li a{
+    color:#F2F2F2;
+}
+
+.nav-bar ul li a:hover{
     cursor: pointer;
     color: #F0D24B;
 }
@@ -235,7 +238,7 @@ input{
 }
 
 .active-button{
-    color: #F0D24B;
+    color: #F0D24B !important;
 }
 
 .dashboard-title-container{

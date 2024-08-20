@@ -9,10 +9,10 @@ const router = express.Router();
 router.get('/dashboard', authController.isAuthenticated, dashboardController.dashboard);
 
 //Partials
-router.get('/dashboard-main', dashboardController.dashboardMain);
-router.get('/workout', dashboardController.workout);
-router.get('/history', dashboardController.history);
-router.get('/calories', dashboardController.calories);
-router.get('/measurements', dashboardController.measurements);
+router.get('/dashboard-main', authController.isAuthenticated, dashboardController.dashboardMain);
+router.get('/workout', authController.isAuthenticated, dashboardController.workout);
+router.get('/history', authController.isAuthenticated, dashboardController.history);
+router.get('/calories', authController.isAuthenticated, dashboardController.calories);
+router.get('/measurements', authController.isAuthenticated, dashboardController.measurements);
 
 export default router;
