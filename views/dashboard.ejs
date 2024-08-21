@@ -64,6 +64,12 @@
 
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
+
+                    //TOGGLE ACTIVE CLASS
+                    links.forEach(l => l.classList.remove('active-button'));
+                    this.classList.add('active-button');
+
+                    //DYNAMICALLY CHANGE PAGE CONTENT
                     const page = this.getAttribute('data-page');
 
                     fetch(`/${page}`)
