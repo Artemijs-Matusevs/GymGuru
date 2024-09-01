@@ -32,8 +32,22 @@ const getMonthText = (month) => {
     }
 };
 
+//Get welcome message
+const getWelcomeMessage = (time) => {
+    //console.log(time);
+
+    if(time > 4 && time < 12){
+        return("Good Morning");
+    }else if(time > 12 && time < 17){
+        return("Good Afternoon");
+    }else{
+        return("Good Evening");
+    }
+}
+
 
 //exports
 export default{
     getMonthText,
+    getWelcomeMessage,
 }

@@ -7,8 +7,9 @@ const dashboardController = {
         let name = req.user.full_name;
         let date = new Date();
         let month = dashboardService.getMonthText(date.getMonth());
+        let message = dashboardService.getWelcomeMessage(date.getHours());
 
-        res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month});
+        res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month, message: message});
     },
 
     dashboardMain: (req, res) => {
