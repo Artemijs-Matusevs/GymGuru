@@ -216,7 +216,7 @@ input{
 
 .nav-bar ul li a:hover{
     cursor: pointer;
-    color: #F0D24B;
+    color: #F0D24B !important;
 }
 
 .sign-out-button{
