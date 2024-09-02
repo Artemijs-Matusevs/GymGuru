@@ -38,7 +38,7 @@ const getWelcomeMessage = (time) => {
 
     if(time > 4 && time < 12){
         return("Good Morning");
-    }else if(time > 12 && time < 17){
+    }else if(time > 11 && time < 18){
         return("Good Afternoon");
     }else{
         return("Good Evening");
