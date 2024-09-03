@@ -43,5 +43,27 @@ function workoutPartial(){
         $(".partials-template-name-form").hide();
     })
 
+    //Selecting exercise
+    $(".exercise").on("click", function() {
+        //alert($(this).text());
+        let exerciseName = $(this).text();
+        let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
+        let htmlTable = `
+            <div id="${divId}">
+                <h2 class="partials-subtitle"> ${exerciseName}</h2>
+                <ion-icon class="partials-icon-button remove-exercise" name="close-outline"></ion-icon>
+            </div>
+        `
+
+        //Insert the html 
+        $("#template-exercise-list").append(htmlTable);
+    })
+
+    //Remove exercise
+    $(document).on("click", ".remove-exercise", function() {
+        let parentId = $(this).parent().attr('id');
+
+        $("#" + parentId).remove();
+    })
  
 }
