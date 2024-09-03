@@ -36,6 +36,24 @@
         <!-- EXERCISES LIST -->
         <div class="exercise-list">
             <h2 class="partials-subtitle">Exercise List</h2>
+            <ul>
+                <% 
+                let currentLetter = '';
+                for(let i = 0; i < exerciseList.length; i++){
+                    let firstLetter = exerciseList[i].charAt(0).toUpperCase();
+
+                    if (firstLetter !== currentLetter){
+                        currentLetter = firstLetter;
+                %>
+                        <li class="partials-subtitle alphabet-title"><%=currentLetter%></li>
+                <%
+                    }
+                %>
+                    <li class="exercise"><%=exerciseList[i]%></li>
+                <%
+                }
+                %>
+            </ul>
         </div>
      </div>
 </div>

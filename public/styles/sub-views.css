@@ -93,7 +93,24 @@
 }
 
 /* EXERCISE LIST STYLING */
-.exercise-list{
 
+.exercise-list ul{
+    height: 350px;
+    width: 600px;
+    overflow-y: auto;
+}
 
+.exercise{
+    font-size: 25px;
+    font-weight: bold;
+    color:#23201E;
+}
+
+.exercise:hover{
+    color:#efc918;
+    cursor: pointer;
+}
+
+.alphabet-title{
+    margin: 25px 0;
 }
