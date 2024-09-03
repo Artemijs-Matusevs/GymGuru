@@ -35,6 +35,9 @@
 
 #partials-new-template{
     display: none;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 }
 
 .partials-template-name{
@@ -87,4 +90,10 @@
     border: solid;
     width: 200px;
     margin: auto 0;
+}
+
+/* EXERCISE LIST STYLING */
+.exercise-list{
+
+
 }

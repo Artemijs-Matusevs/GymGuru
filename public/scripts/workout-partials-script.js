@@ -7,7 +7,7 @@ function workoutPartial(){
     
     newTemplateButton.addEventListener('click', function() {
         mainContent.style.display = "none";
-        newTemplateContent.style.display = "block";
+        newTemplateContent.style.display = "flex";
     })
 
     templateCancelButton.addEventListener('click', function() {
@@ -42,5 +42,6 @@ function workoutPartial(){
         $(".partials-template-name").show();
         $(".partials-template-name-form").hide();
     })
+
  
 }

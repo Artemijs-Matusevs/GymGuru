@@ -16,8 +16,11 @@ const dashboardController = {
         res.render("dashboard-main.ejs");
     },
      
-    workout: (req, res) => {
-        res.render("workout.ejs");
+    //Workout section partial
+    workout: async (req, res) => {
+        //Get list of all the exercises stored in the database
+        let exerciseList = await dashboardService.getNamesAllExercises();
+        res.render("workout.ejs", {exerciseList: exerciseList});
     },
 
     history: (req, res) => {

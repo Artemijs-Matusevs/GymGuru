@@ -1,4 +1,5 @@
 import userModel from '../models/userModel.js';
+import workoutModel from '../models/workoutModel.js';
 
 //Convert month digit to textual representation
 const getMonthText = (month) => {
@@ -46,8 +47,21 @@ const getWelcomeMessage = (time) => {
 }
 
 
+//Get names of all exercises
+const getNamesAllExercises = async () => {
+    let allExercises = await workoutModel.getAllExercises();
+    let exerciseNames = [];
+
+    allExercises.forEach(exercise => {
+        exerciseNames.push(exercise.exercise_name);
+    })
+
+    return exerciseNames;
+}
+
 //exports
 export default{
     getMonthText,
     getWelcomeMessage,
+    getNamesAllExercises,
 }
