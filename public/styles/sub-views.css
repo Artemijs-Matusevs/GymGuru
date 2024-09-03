@@ -37,7 +37,7 @@
     display: none;
 }
 
-.template-name{
+.partials-template-name{
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -74,3 +74,17 @@
     color: #efc918;
 }
 
+.partials-template-name-form form{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.partials-template-name-form form input{
+    color: #23201E;
+    border-color: #23201E;
+    border: solid;
+    width: 200px;
+    margin: auto 0;
+}
