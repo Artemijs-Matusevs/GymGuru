@@ -246,7 +246,7 @@ input{
     flex-direction: column;
     justify-content: space-between;
     gap: 30px;
-    height: 70vh;
+    height: 80vh;
 }
 
 .slogan-container{
