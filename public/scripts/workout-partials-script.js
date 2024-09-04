@@ -13,6 +13,7 @@ function workoutPartial(){
     templateCancelButton.addEventListener('click', function() {
         mainContent.style.display = "block";
         newTemplateContent.style.display = "none";
+        $("#template-exercise-list").html("");
     })
 
     //Changing name for template
