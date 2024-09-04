@@ -398,3 +398,10 @@ h2{
 .dashboard-copyright{
     color: #2a2a30;
 }
+
+.exercise-header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+}

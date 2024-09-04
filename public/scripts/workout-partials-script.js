@@ -51,9 +51,10 @@ function workoutPartial(){
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
             <div id="${divId}">
-                <div class="partials-template-name">
-                    <h2 class="partials-subtitle"> ${exerciseName}</h2>
-                    <ion-icon class="partials-icon-button remove-exercise" name="close-outline"></ion-icon>
+                <h2 class="partials-subtitle exercise-title"> ${exerciseName}</h2>
+                <div class="exercise-header">
+                    <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
+                    <h2 class="partials-subtitle partials-button remove-exercise"> Remove Exercise ×</h2>
                 </div>
                 <div class="exercise-table">
                     <div class="table-row header">
