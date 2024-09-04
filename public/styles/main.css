@@ -290,7 +290,7 @@ h2{
 .dash-flex-container{
     display: flex;
     width: 100%;
-    height: 70vh;
+    height: 80vh;
     justify-content: center;
     align-items: start;
     gap: 75px;
@@ -323,7 +323,7 @@ h2{
 
 /* DASHBORD BANNER STYLING */
 .banner{
-    height: 30vh;
+    height: 20vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -339,6 +339,9 @@ h2{
     justify-content: center;
     align-items: center;
     box-shadow: 2px 2px 10px #23201E;
+    position: absolute;
+    top: 35px;
+    right: 35px;
 }
 
 .date{

@@ -95,7 +95,7 @@
 /* EXERCISE LIST STYLING */
 
 .exercise-list ul{
-    height: 350px;
+    height: 55vh;
     width: 600px;
     overflow-y: auto;
 }
@@ -151,4 +151,18 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: center;
+}
+
+#template-exercise-list{
+    width: 500px;
+    height: 45vh;
+    overflow-y: auto;
+}
+
+.template-save-cancel-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+    width: 100%;
 }
