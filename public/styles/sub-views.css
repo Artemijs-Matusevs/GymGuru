@@ -114,3 +114,41 @@
 .alphabet-title{
     margin: 25px 0;
 }
+
+
+/* Exercise table */
+.exercise-table{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    background-color: black;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.table-row{
+    display: contents;
+}
+
+.header {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.cell{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.cell input[type="number"]{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
