@@ -14,6 +14,8 @@ function workoutPartial(){
         mainContent.style.display = "block";
         newTemplateContent.style.display = "none";
         $("#template-exercise-list").html("");
+        $(".template-name").text("Workout Template");
+        $(".template-name-field").val("Workout Template");
     })
 
     //Changing name for template
@@ -50,7 +52,7 @@ function workoutPartial(){
         let exerciseName = $(this).text();
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
-            <div id="${divId}">
+            <div class="exercise-table-container" id="${divId}">
                 <h2 class="partials-subtitle exercise-title"> ${exerciseName}</h2>
                 <div class="exercise-header">
                     <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
@@ -62,6 +64,7 @@ function workoutPartial(){
                         <div class="cell">Previous</div>
                         <div class="cell">kg</div>
                         <div class="cell">Reps</div>
+                        <div class="cell"></div>
                     </div>
                 </div>
             </div>
@@ -77,5 +80,43 @@ function workoutPartial(){
 
         $("#" + parentId).remove();
     })
+
+    //Add set
+    $(document).on("click", ".add-set-button", function() {
+        //Find the exercise table the button is associated with in the DOM
+        let table = $(this).closest(".exercise-table-container").find(".exercise-table");
+
+        //Get current number of rows
+        let currentSetNumber = table.find('.table-row').length;
+
+        //New set row
+        let newRow = `
+            <div class="table-row">
+                <div class="cell">${currentSetNumber}</div>
+                <div class="cell">20kg</div>
+                <div class="cell">20kg</div>
+                <div class="cell">5</div>
+                <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
+            </div>
+        `
+
+        //Append to the table
+        table.append(newRow);
+    })
+
+    //Remove set
+    $(document).on("click", ".remove-set-button", function() {
+        //Find the exercise table the button is associated with in the DOM
+        let table = $(this).closest(".exercise-table-container").find(".exercise-table");
+
+        //Remove the row
+        $(this).parent().remove();
+
+        //Update the current set numbers
+        table.find('.table-row').not('.header').each(function(index) {
+            $(this).find('.cell').first().text(index + 1);
+        })
+    })
+
  
 }
