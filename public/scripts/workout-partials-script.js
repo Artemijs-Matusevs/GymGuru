@@ -62,7 +62,7 @@ function workoutPartial(){
                     <div class="table-row header">
                         <div class="cell">Set</div>
                         <div class="cell">Previous</div>
-                        <div class="cell">kg</div>
+                        <div class="cell">Current</div>
                         <div class="cell">Reps</div>
                         <div class="cell"></div>
                     </div>
@@ -93,9 +93,9 @@ function workoutPartial(){
         let newRow = `
             <div class="table-row">
                 <div class="cell">${currentSetNumber}</div>
-                <div class="cell">20kg</div>
-                <div class="cell">20kg</div>
-                <div class="cell">5</div>
+                <div class="cell"><input placeholder="kg" type="number"></div>
+                <div class="cell"><input placeholder="kg" type="number"></div>
+                <div class="cell"><input type="number"></div>
                 <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
             </div>
         `
