@@ -59,9 +59,15 @@ const getNamesAllExercises = async () => {
     return exerciseNames;
 }
 
+//Insert new template 
+const newTemplate = async (userId, templateName) => {
+    await workoutModel.addNewWorkoutTemplate(userId, templateName);
+}
+
 //exports
 export default{
     getMonthText,
     getWelcomeMessage,
     getNamesAllExercises,
+    newTemplate,
 }

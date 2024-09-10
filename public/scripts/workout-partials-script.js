@@ -118,5 +118,23 @@ function workoutPartial(){
         })
     })
 
+    //Post new template to back-end
+    $("#submit-new-template").on("click", function() {
+        let workoutName = $(".template-name").text();
+
+        $.ajax({
+            url: '/new-template',
+            type: 'POST',
+            data: {template_name: workoutName},
+            success: function(response) {
+                console.log("New template posted")
+                window.location.href = response.redirectUrl;
+            },
+            error: function (xhr, status, err) {
+                console.log(err);
+            }
+        })
+    })
+
  
 }

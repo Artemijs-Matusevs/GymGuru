@@ -33,8 +33,15 @@ const dashboardController = {
 
     measurements: (req, res) => {
         res.render("measurements.ejs");
-    }
+    },
     
+
+    //POST new workout template
+    newWorkoutTemplate: async (req, res) => {
+        //console.log(req.user);
+        await dashboardService.newTemplate(req.user.id, req.body.template_name);
+        res.status(200).json({redirectUrl: '/dashboard'});
+    }
 }
 
 

@@ -15,4 +15,7 @@ router.get('/history', authController.isAuthenticated, dashboardController.histo
 router.get('/calories', authController.isAuthenticated, dashboardController.calories);
 router.get('/measurements', authController.isAuthenticated, dashboardController.measurements);
 
+//Post new workout template details
+router.post('/new-template', authController.isAuthenticated, dashboardController.newWorkoutTemplate);
+
 export default router;
