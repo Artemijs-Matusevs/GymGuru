@@ -29,6 +29,7 @@ const addNewExercise = async(template_id, exercise_id, order_position) => {
                                         INSERT INTO template_exercises (template_id, exercise_id, order_position)
                                         VALUES ($1, $2, $3)
                                         RETURNING template_exercise_id `, [template_id, exercise_id, order_position]);
+        return result.rows[0].template_exercise_id;
     }catch(err){
         console.log("Error adding new exercise to template to DB", err.message);
     }

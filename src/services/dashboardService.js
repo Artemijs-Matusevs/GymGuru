@@ -67,12 +67,13 @@ const getNamesAllExercises = async () => {
 const newTemplate = async (userId, templateName, exerciseData) => {
     //Add the new template to the templates table (returns template_id)
     const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
+    console.log(`New template added, template name:${template_id}`);
 
     //Add each exercise in the template to the template_exercises table
     //console.log(exerciseData[0].sets);
     exerciseData.forEach(async exercise => {
         const template_exercise_id = await newExercise(template_id, exercise.id, exercise.order);
-        console.log(template_exercise_id);
+
         //Add each set of the exercise to the sets table
         exercise.sets.forEach(set => {
             //console.log(set.setNumber, set.weight, set.previous, set.reps);
