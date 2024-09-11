@@ -57,12 +57,19 @@ const getNamesAllExercises = async () => {
     })
 
     return exerciseNames;
-}
+};
 
 //Insert new template 
 const newTemplate = async (userId, templateName) => {
-    await workoutModel.addNewWorkoutTemplate(userId, templateName);
-}
+    const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
+    console.log(template_id);
+};
+
+//Insert new exercise
+const newExercise = async (template_id, exercise_id, order_position) => {
+    await workoutModel.addNewExercise(template_id, exercise_id, order_position);
+    console.log("New exercise added");
+};
 
 //exports
 export default{

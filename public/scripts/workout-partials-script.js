@@ -122,6 +122,7 @@ function workoutPartial(){
     $("#submit-new-template").on("click", function() {
         let workoutName = $(".template-name").text();
 
+
         $.ajax({
             url: '/new-template',
             type: 'POST',
