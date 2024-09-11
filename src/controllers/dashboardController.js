@@ -39,7 +39,7 @@ const dashboardController = {
     //POST new workout template
     newWorkoutTemplate: async (req, res) => {
         //console.log(req.user);
-        await dashboardService.newTemplate(req.user.id, req.body.template_name);
+        await dashboardService.newTemplate(req.user.id, req.body.template_name, req.body.exercises);
         res.status(200).json({redirectUrl: '/dashboard'});
     }
 }

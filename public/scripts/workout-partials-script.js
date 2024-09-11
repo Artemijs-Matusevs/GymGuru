@@ -51,10 +51,11 @@ function workoutPartial(){
         //alert($(this).text());
         let exerciseName = $(this).text();
         let exerciseId = $(this).attr('exercise-id');
+        let order = $(".exercise-title").length + 1;//To keep track of the order of the exercises
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
             <div class="exercise-table-container" id="${divId}">
-                <h2 exercise-id="${exerciseId}" class="partials-subtitle exercise-title"> ${exerciseName}</h2>
+                <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title"> ${exerciseName}</h2>
                 <div class="exercise-header">
                     <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
                     <h2 class="partials-subtitle partials-button remove-exercise"> Remove Exercise ×</h2>
@@ -121,15 +122,23 @@ function workoutPartial(){
 
     //Post new template to back-end
     $("#submit-new-template").on("click", function() {
+        //Get name of new template
         let workoutName = $(".template-name").text();
-        let exerciseIds = $(".exercise-title").map(function() {
-            return $(this).attr('exercise-id');
+
+        //Get all exercise ID's and order and convert to jQuery object
+        let exercises = $(".exercise-title").map(function() {
+            return{
+                id: $(this).attr('exercise-id'),
+                order: $(this).attr('exercise-order')
+            };
         }).get();
 
+
+        //Make the post request to the back-end with data of the new workout template
         $.ajax({
             url: '/new-template',
             type: 'POST',
-            data: {template_name: workoutName},
+            data: {template_name: workoutName, exercises: exercises},
             success: function(response) {
                 console.log("New template posted")
                 window.location.href = response.redirectUrl;

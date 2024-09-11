@@ -59,18 +59,16 @@ const getNamesAllExercises = async () => {
         });
     });
 
-    console.log(exerciseData);
-
     return exerciseData;
 };
 
 //Insert new template 
-const newTemplate = async (userId, templateName) => {
+const newTemplate = async (userId, templateName, exerciseData) => {
+    //Return the new template ID
     const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
-    //Template ID
-    console.log(template_id);
 
     //Exercise ID's and position order
+    console.log(exerciseData);
 };
 
 //Insert new exercise
