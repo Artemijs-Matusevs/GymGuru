@@ -55,7 +55,7 @@ function workoutPartial(){
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
             <div class="exercise-table-container" id="${divId}">
-                <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title"> ${exerciseName}</h2>
+                <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title template-exercise"> ${exerciseName}</h2>
                 <div class="exercise-header">
                     <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
                     <h2 class="partials-subtitle partials-button remove-exercise"> Remove Exercise ×</h2>
@@ -93,11 +93,11 @@ function workoutPartial(){
 
         //New set row
         let newRow = `
-            <div class="table-row">
-                <div class="cell">${currentSetNumber}</div>
-                <div class="cell"><input placeholder="kg" type="number"></div>
-                <div class="cell"><input placeholder="kg" type="number"></div>
-                <div class="cell"><input type="number"></div>
+            <div class="table-row exercise-set">
+                <div class="cell exercise-set-number">${currentSetNumber}</div>
+                <div class="cell"><input class="exercise-previous-weight" placeholder="kg" value="0" type="number"></div>
+                <div class="cell"><input class="exercise-current-weight" placeholder="kg" value="0" type="number"></div>
+                <div class="cell"><input class="exercise-reps" value="0" type="number"></div>
                 <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
             </div>
         `
@@ -126,10 +126,25 @@ function workoutPartial(){
         let workoutName = $(".template-name").text();
 
         //Get all exercise ID's and order and convert to jQuery object
-        let exercises = $(".exercise-title").map(function() {
-            return{
-                id: $(this).attr('exercise-id'),
-                order: $(this).attr('exercise-order')
+        let exercises = $(".template-exercise").map(function() {
+            let exerciseId = $(this).attr("exercise-id");
+            let order = $(this).attr("exercise-order");
+
+            //Get sets associated with each exercise
+            let sets = $(this).closest(".exercise-table-container").find(".exercise-set").map(function() {
+                return {
+                    setNumber: $(this).find(".exercise-set-number").text(),
+                    previous: $(this).find(".exercise-previous-weight").val(),
+                    weight: $(this).find(".exercise-current-weight").val(),
+                    reps: $(this).find(".exercise-reps").val(),
+
+                }
+            }).get();
+
+            return {
+                id: exerciseId,
+                order: order,
+                sets: sets
             };
         }).get();
 

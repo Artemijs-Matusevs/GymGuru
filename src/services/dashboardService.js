@@ -52,6 +52,7 @@ const getNamesAllExercises = async () => {
     let allExercises = await workoutModel.getAllExercises();
     let exerciseData = [];
 
+    //Create object to store each exercise name and it's id
     allExercises.forEach(exercise => {
         exerciseData.push({
             id: exercise.exercise_id,
@@ -64,18 +65,34 @@ const getNamesAllExercises = async () => {
 
 //Insert new template 
 const newTemplate = async (userId, templateName, exerciseData) => {
-    //Return the new template ID
+    //Add the new template to the templates table (returns template_id)
     const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
 
-    //Exercise ID's and position order
-    console.log(exerciseData);
+    //Add each exercise in the template to the template_exercises table
+    //console.log(exerciseData[0].sets);
+    exerciseData.forEach(async exercise => {
+        const template_exercise_id = await newExercise(template_id, exercise.id, exercise.order);
+        console.log(template_exercise_id);
+        //Add each set of the exercise to the sets table
+        exercise.sets.forEach(set => {
+            //console.log(set.setNumber, set.weight, set.previous, set.reps);
+            newSet(template_exercise_id, set.setNumber, set.weight, set.previous, set.reps);
+        });
+    });
 };
 
 //Insert new exercise
 const newExercise = async (template_id, exercise_id, order_position) => {
-    await workoutModel.addNewExercise(template_id, exercise_id, order_position);
-    console.log("New exercise added");
+    let id = await workoutModel.addNewExercise(template_id, exercise_id, order_position);
+    console.log(`New exercise added, exercise_id:${exercise_id}`);
+    return id;
 };
+
+//Insert new set
+const newSet = async (template_exercise_id, set_number, weight, previous, reps) => {
+    await workoutModel.addNewSet(template_exercise_id, set_number, weight, previous, reps);
+    console.log(`New set added, set number:${set_number}`);
+}
 
 //exports
 export default{
