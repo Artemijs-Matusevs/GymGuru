@@ -46,7 +46,7 @@
                 <% 
                 let currentLetter = '';
                 for(let i = 0; i < exerciseList.length; i++){
-                    let firstLetter = exerciseList[i].charAt(0).toUpperCase();
+                    let firstLetter = exerciseList[i].name.charAt(0).toUpperCase();
 
                     if (firstLetter !== currentLetter){
                         currentLetter = firstLetter;
@@ -55,7 +55,7 @@
                 <%
                     }
                 %>
-                    <li class="exercise"><%=exerciseList[i]%></li>
+                    <li exercise-id="<%=exerciseList[i].id%>" class="exercise"><%=exerciseList[i].name%></li>
                 <%
                 }
                 %>

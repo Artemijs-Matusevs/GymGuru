@@ -50,19 +50,27 @@ const getWelcomeMessage = (time) => {
 //Get names of all exercises
 const getNamesAllExercises = async () => {
     let allExercises = await workoutModel.getAllExercises();
-    let exerciseNames = [];
+    let exerciseData = [];
 
     allExercises.forEach(exercise => {
-        exerciseNames.push(exercise.exercise_name);
-    })
+        exerciseData.push({
+            id: exercise.exercise_id,
+            name: exercise.exercise_name
+        });
+    });
 
-    return exerciseNames;
+    console.log(exerciseData);
+
+    return exerciseData;
 };
 
 //Insert new template 
 const newTemplate = async (userId, templateName) => {
     const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
+    //Template ID
     console.log(template_id);
+
+    //Exercise ID's and position order
 };
 
 //Insert new exercise

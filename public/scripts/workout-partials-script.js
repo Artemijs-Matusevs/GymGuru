@@ -50,10 +50,11 @@ function workoutPartial(){
     $(".exercise").on("click", function() {
         //alert($(this).text());
         let exerciseName = $(this).text();
+        let exerciseId = $(this).attr('exercise-id');
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
             <div class="exercise-table-container" id="${divId}">
-                <h2 class="partials-subtitle exercise-title"> ${exerciseName}</h2>
+                <h2 exercise-id="${exerciseId}" class="partials-subtitle exercise-title"> ${exerciseName}</h2>
                 <div class="exercise-header">
                     <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
                     <h2 class="partials-subtitle partials-button remove-exercise"> Remove Exercise ×</h2>
@@ -121,7 +122,9 @@ function workoutPartial(){
     //Post new template to back-end
     $("#submit-new-template").on("click", function() {
         let workoutName = $(".template-name").text();
-
+        let exerciseIds = $(".exercise-title").map(function() {
+            return $(this).attr('exercise-id');
+        }).get();
 
         $.ajax({
             url: '/new-template',
