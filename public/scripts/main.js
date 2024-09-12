@@ -49,3 +49,8 @@ fetch('/dashboard-main')
 .then(html => {
     content.innerHTML = html;
 })
+
+//Remove alert message
+$(".remove-alert-button").on("click", function() {
+    $(".alert-message").hide();
+})

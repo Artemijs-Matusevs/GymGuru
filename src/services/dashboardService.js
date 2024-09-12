@@ -59,7 +59,6 @@ const getNamesAllExercises = async () => {
             name: exercise.exercise_name
         });
     });
-
     return exerciseData;
 };
 
@@ -67,7 +66,7 @@ const getNamesAllExercises = async () => {
 const newTemplate = async (userId, templateName, exerciseData) => {
     //Add the new template to the templates table (returns template_id)
     const template_id = await workoutModel.addNewWorkoutTemplate(userId, templateName);
-    console.log(`New template added, template name:${template_id}`);
+    console.log(`New template added, template name:${templateName}`);
 
     //Add each exercise in the template to the template_exercises table
     //console.log(exerciseData[0].sets);
@@ -75,10 +74,12 @@ const newTemplate = async (userId, templateName, exerciseData) => {
         const template_exercise_id = await newExercise(template_id, exercise.id, exercise.order);
 
         //Add each set of the exercise to the sets table
-        exercise.sets.forEach(set => {
-            //console.log(set.setNumber, set.weight, set.previous, set.reps);
-            newSet(template_exercise_id, set.setNumber, set.weight, set.previous, set.reps);
-        });
+        if(Array.isArray(exercise.sets) && exercise.sets.length > 0){
+            exercise.sets.forEach(set => {
+                //console.log(set.setNumber, set.weight, set.previous, set.reps);
+                newSet(template_exercise_id, set.setNumber, set.weight, set.previous, set.reps);
+            });
+        }
     });
 };
 

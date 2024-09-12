@@ -1,11 +1,16 @@
 import db from '../config/database.js';
 
 const getAllExercises = async ()=> {
-    const result = await db.query(`
-                                    SELECT * 
-                                    FROM exercises_dataset 
-                                    ORDER BY exercise_name ASC`);
-    return result.rows;
+    try{
+        const result = await db.query(`
+            SELECT * 
+            FROM exercises_dataset 
+            ORDER BY exercise_name ASC`);
+
+        return result.rows;
+    }catch(err){
+        console.log(`Error getting all exercises from dataset:${err.essage}`);
+    }
 };
 
 //Create new record for the new workout template

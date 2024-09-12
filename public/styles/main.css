@@ -405,3 +405,29 @@ h2{
     justify-content: flex-start;
     gap: 25px;
 }
+
+/* ALERT MESSAGE */
+.alert-message{
+    width: 100vw;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    background-color: rgba(42, 42, 48, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    color:#F2F2F2;
+    gap: 25px;
+}
+
+.remove-alert-button{
+    color:#F2F2F2;
+    font-size: 46px;
+}
+
+.remove-alert-button:hover{
+    color:#efc918;
+    cursor: pointer;
+}

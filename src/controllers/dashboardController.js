@@ -9,7 +9,11 @@ const dashboardController = {
         let month = dashboardService.getMonthText(date.getMonth());
         let message = dashboardService.getWelcomeMessage(date.getHours());
 
-        res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month, message: message});
+        //Get hold if alert message if any
+        let alertMessage = req.session.alertMessage;
+        req.session.alertMessage = null;//Clear it
+
+        res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month, message: message, alertMessage: alertMessage});
     },
 
     dashboardMain: (req, res) => {
@@ -40,6 +44,10 @@ const dashboardController = {
     newWorkoutTemplate: async (req, res) => {
         //console.log(req.user);
         await dashboardService.newTemplate(req.user.id, req.body.template_name, req.body.exercises);
+
+        //send new alert message
+        let alertMessage = `Template '${req.body.template_name}' has been created`
+        req.session.alertMessage = alertMessage;
         res.status(200).json({redirectUrl: '/dashboard'});
     }
 }

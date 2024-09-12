@@ -12,6 +12,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
+
+    <!-- ALERT MESSAGE FOR SENDING NOTIFICATIONS FROM BACK END -->
+     <% if(locals.alertMessage) { %>
+        <div class="alert-message">
+            <h1> <%= alertMessage%> </h1>
+            <ion-icon class="remove-alert-button" name="trash-bin-outline"></ion-icon>
+        </div>
+    <%} %>
+
     <div class="main-body">
         <div class="dashboard-left-panel">
             <div class="dashboard-title-container">
