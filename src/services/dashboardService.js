@@ -83,6 +83,44 @@ const newTemplate = async (userId, templateName, exerciseData) => {
     });
 };
 
+
+//Get list of all user templates
+const getUserTemplates = async (user_id) => {
+    //Get template names
+    let templates = await workoutModel.fetchUserTemplates(user_id);
+    //console.log(templates);
+
+    let templateData = [];
+
+    //Get exercise data for each workout template and build a js object
+    if(Array.isArray(templates) && templates.length > 0){
+
+        templateData = await Promise.all(
+
+            templates.map(async template => {
+                //Get list of all the exercises for specific template
+                let exercises = await workoutModel.fetchTemplateExercises(template.template_id);
+
+                //Build a temp object for each template
+                let tempObj = {
+                    template_id: template.template_id,
+                    template_name: template.template_name,
+                    exercises: exercises.map(exercise => ({
+                        exercise_name: exercise.exercise_name,
+                    }))
+                }
+                
+                return tempObj;
+
+            })
+        );
+    }
+
+    console.log(templateData);
+}
+
+
+//NOT EXPORTS
 //Insert new exercise
 const newExercise = async (template_id, exercise_id, order_position) => {
     let id = await workoutModel.addNewExercise(template_id, exercise_id, order_position);
@@ -96,10 +134,13 @@ const newSet = async (template_exercise_id, set_number, weight, previous, reps) 
     console.log(`New set added, set number:${set_number}`);
 }
 
+
+
 //exports
 export default{
     getMonthText,
     getWelcomeMessage,
     getNamesAllExercises,
     newTemplate,
+    getUserTemplates,
 }

@@ -49,6 +49,34 @@ const addNewSet = async(template_exercise_id, set_number, weight, previous, reps
     }catch(err){
         console.log("Error adding new set to DB", err.message);
     }
+};
+
+//Feth all templates for a user
+const fetchUserTemplates = async(user_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT *
+                                        FROM workout_templates
+                                        WHERE user_id = $1`, [user_id]);
+        return result.rows;
+    }catch(err){
+        console.log(`Error fetching templates for user ${err.message}`);
+    }
+}
+
+const fetchTemplateExercises = async(template_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT e.exercise_name
+                                        FROM template_exercises te
+                                        JOIN exercises_dataset e ON te.exercise_id = e.exercise_id
+                                        WHERE te.template_id = $1
+                                        ORDER BY te.order_position;
+                                        `, [template_id]);
+        return result.rows;
+    }catch(err){
+        console.log(`Error fetching template exercises: ${err.message}`);
+    }
 }
 
 //exports
@@ -57,4 +85,6 @@ export default{
     addNewWorkoutTemplate,
     addNewExercise,
     addNewSet,
+    fetchUserTemplates,
+    fetchTemplateExercises,
 }
