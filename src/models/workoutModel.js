@@ -64,10 +64,11 @@ const fetchUserTemplates = async(user_id) => {
     }
 }
 
+//Fetch all exercises for a specific template
 const fetchTemplateExercises = async(template_id) => {
     try{
         const result = await db.query(`
-                                        SELECT e.exercise_name
+                                        SELECT e.exercise_name, te.template_exercise_id
                                         FROM template_exercises te
                                         JOIN exercises_dataset e ON te.exercise_id = e.exercise_id
                                         WHERE te.template_id = $1
@@ -79,6 +80,20 @@ const fetchTemplateExercises = async(template_id) => {
     }
 }
 
+//Fetch number of sets for a specific template exercise
+const fetchNumOfSets = async(template_exercise_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT template_exercise_id, COUNT(*) AS sets
+                                        FROM exercise_sets
+                                        WHERE template_exercise_id = $1
+                                        GROUP BY template_exercise_id;`, [template_exercise_id]);
+        return result.rows[0];
+    }catch(err){
+        console.log(`Error fetching number of sets for exercise: ${err.message}`);
+    }
+}
+
 //exports
 export default{
     getAllExercises,
@@ -87,4 +102,5 @@ export default{
     addNewSet,
     fetchUserTemplates,
     fetchTemplateExercises,
+    fetchNumOfSets
 }

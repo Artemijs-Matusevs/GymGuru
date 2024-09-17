@@ -98,17 +98,21 @@ const getUserTemplates = async (user_id) => {
         templateData = await Promise.all(
 
             templates.map(async template => {
-                //Get list of all the exercises for specific template
-                let exercises = await workoutModel.fetchTemplateExercises(template.template_id);
-
                 //Build a temp object for each template
                 let tempObj = {
                     template_id: template.template_id,
                     template_name: template.template_name,
-                    exercises: exercises.map(exercise => ({
-                        exercise_name: exercise.exercise_name,
-                    }))
                 }
+
+                //Get list of all the exercises for specific template
+                let exercises = await workoutModel.fetchTemplateExercises(template.template_id);
+
+                //If there are any exercises, add the name and number of sets to the tempObj
+                if(Array.isArray(exercises) && exercises.length > 0){
+                    tempObj.exercises = exercises.map((exercise) => ({
+                        exercise_name: exercise.exercise_name,
+                    }));
+                };
                 
                 return tempObj;
 
@@ -116,8 +120,8 @@ const getUserTemplates = async (user_id) => {
         );
     }
 
-    console.log(templateData);
-}
+    console.log(templateData[0].exercises);
+}   
 
 
 //NOT EXPORTS
