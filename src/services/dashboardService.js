@@ -108,10 +108,22 @@ const getUserTemplates = async (user_id) => {
                 let exercises = await workoutModel.fetchTemplateExercises(template.template_id);
 
                 //If there are any exercises, add the name and number of sets to the tempObj
-                if(Array.isArray(exercises) && exercises.length > 0){
+                /*if(Array.isArray(exercises) && exercises.length > 0){
                     tempObj.exercises = exercises.map((exercise) => ({
                         exercise_name: exercise.exercise_name,
+                        number_of_sets: workoutModel.fetchNumOfSets(exercise.template_exercise_id),
                     }));
+                };*/
+
+                //Add the exercesise names and number of sets to the temp object if there are any
+                if(Array.isArray(exercises) && exercises.length > 0){
+                    //Wait for all db queries to be returned
+                    tempObj.exercises = await Promise.all(
+                        tempObj.exercises = exercises.map(async (exercise) => ({
+                            exercsie_name: exercise.exercise_name,
+                            number_of_sets: await workoutModel.fetchNumOfSets(exercise.template_exercise_id)
+                        }))
+                    );
                 };
                 
                 return tempObj;
