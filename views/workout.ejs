@@ -4,26 +4,27 @@
     <div id="partials-content-workout">
         <h1 class="partials-title"> WORKOUT </h1>
         <div>
-            <h2 class="partials-subtitle">Quick Start</h2>
-            <div class="partials-button h1-title"><h1>START EMPTY WORKOUT +</h1></div>
-        </div>
-        <div>
-            <h2 class="partials-subtitle">My Templates</h2>
             <div class="saved-templates-list">
-                <% if (locals.userTemplates) { %>
+                <% if (locals.userTemplates && locals.userTemplates.length > 0) { %>
                     <% userTemplates.forEach(template => { %>
-                        <h2 class="partials-subtitle"> <%= template.template_name %> </h2>
-                        <% if (Array.isArray(template.exercises) && template.exercises.length > 0) { %>
-                            <ul>
-                                <% template.exercises.forEach(exercise => { %>
-                                    <li> x<%=exercise.number_of_sets%> <%=exercise.exercise_name%></li>
-                                <% }) %>
-                            </ul>
-                        <% } %>
-                   <% }) %>
-                <% } %> 
+                        <div class="saved-template">
+                            <h2 class="partials-subtitle"> <%= template.template_name %> </h2>
+                            <% if (Array.isArray(template.exercises) && template.exercises.length > 0) { %>
+                                <ul>
+                                    <% template.exercises.forEach(exercise => { %>
+                                        <li> x<%=exercise.number_of_sets%> <%=exercise.exercise_name%></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                <% }else{ %>
+                    <h2 class="partials-subtitle"> Your saved templates will appear here... </h2>
+                <%} %> 
             </div>
             <div class="partials-button h1-title"><h1 id="new-template">CREATE NEW TEMPLATE +</h1></div>
+            <div class="partials-button h1-title"><h1>START EMPTY WORKOUT +</h1></div>
+
         </div>
     </div>
 

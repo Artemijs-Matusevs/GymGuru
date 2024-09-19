@@ -197,3 +197,18 @@
     align-items: center;
     justify-content: center;
 }
+
+
+/* SAVED TEMPLATES */
+.saved-templates-list{
+    overflow-y: auto;
+    height: 400px;
+}
+
+.saved-template{
+    width: 500px;
+    padding: 25px;
+    box-sizing: border-box;
+    border: solid;
+    margin-top: 25px;
+}
