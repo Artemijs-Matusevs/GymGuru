@@ -90,13 +90,16 @@ const getUserTemplates = async (user_id) => {
     let templates = await workoutModel.fetchUserTemplates(user_id);
     //console.log(templates);
 
+    //Empty object to store saved template
     let templateData = [];
 
-    //Get exercise data for each workout template and build a js object
+    //Get exercise data for each workout template and build a js object (if there is any templates saved)
     if(Array.isArray(templates) && templates.length > 0){
 
+        //Wait for all queries to finish
         templateData = await Promise.all(
 
+            //Loop through each template
             templates.map(async template => {
                 //Build a temp object for each template
                 let tempObj = {
@@ -108,14 +111,6 @@ const getUserTemplates = async (user_id) => {
                 let exercises = await workoutModel.fetchTemplateExercises(template.template_id);
 
                 //If there are any exercises, add the name and number of sets to the tempObj
-                /*if(Array.isArray(exercises) && exercises.length > 0){
-                    tempObj.exercises = exercises.map((exercise) => ({
-                        exercise_name: exercise.exercise_name,
-                        number_of_sets: workoutModel.fetchNumOfSets(exercise.template_exercise_id),
-                    }));
-                };*/
-
-                //Add the exercesise names and number of sets to the temp object if there are any
                 if(Array.isArray(exercises) && exercises.length > 0){
                     //Wait for all db queries to be returned
                     tempObj.exercises = await Promise.all(
@@ -132,7 +127,8 @@ const getUserTemplates = async (user_id) => {
         );
     }
 
-    console.log(templateData[0].exercises);
+    //Testing
+    //console.log(templateData[0].exercises);
 }   
 
 
