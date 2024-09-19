@@ -84,7 +84,7 @@ function workoutPartial(){
     })
 
     //Add set
-    $(document).on("click", ".add-set-button", function() {
+    $(document).off("click", ".add-set-button").on("click", ".add-set-button", function() {
         //Find the exercise table the button is associated with in the DOM
         let table = $(this).closest(".exercise-table-container").find(".exercise-table");
 

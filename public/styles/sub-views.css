@@ -202,7 +202,7 @@
 /* SAVED TEMPLATES */
 .saved-templates-list{
     overflow-y: auto;
-    height: 400px;
+    height: 57vh;
 }
 
 .saved-template{
@@ -211,4 +211,11 @@
     box-sizing: border-box;
     border: solid;
     margin-top: 25px;
+}
+
+.template-footer-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px
 }
