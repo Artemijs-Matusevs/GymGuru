@@ -57,7 +57,8 @@ const fetchUserTemplates = async(user_id) => {
         const result = await db.query(`
                                         SELECT *
                                         FROM workout_templates
-                                        WHERE user_id = $1`, [user_id]);
+                                        WHERE user_id = $1
+                                        ORDER BY template_name ASC`, [user_id]);
         return result.rows;
     }catch(err){
         console.log(`Error fetching templates for user ${err.message}`);
@@ -88,7 +89,7 @@ const fetchNumOfSets = async(template_exercise_id) => {
                                         FROM exercise_sets
                                         WHERE template_exercise_id = $1
                                         GROUP BY template_exercise_id;`, [template_exercise_id]);
-        return result.rows[0];
+        return result.rows[0].sets;
     }catch(err){
         console.log(`Error fetching number of sets for exercise: ${err.message}`);
     }

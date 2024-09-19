@@ -27,7 +27,7 @@ const dashboardController = {
         //Get all stored user templates
         let userTemplates = await dashboardService.getUserTemplates(req.user.id);
 
-        res.render("workout.ejs", {exerciseList: exerciseList});
+        res.render("workout.ejs", {exerciseList: exerciseList, userTemplates: userTemplates});
     },
 
     history: (req, res) => {
