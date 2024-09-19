@@ -12,7 +12,7 @@
                             <% if (Array.isArray(template.exercises) && template.exercises.length > 0) { %>
                                 <ul>
                                     <% template.exercises.forEach(exercise => { %>
-                                        <li> x<%=exercise.number_of_sets%> <%=exercise.exercise_name%></li>
+                                        <li><%=exercise.number_of_sets%> × <%=exercise.exercise_name%></li>
                                     <% }) %>
                                 </ul>
                             <% } %>

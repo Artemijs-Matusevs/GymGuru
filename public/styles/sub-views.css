@@ -210,7 +210,17 @@
     padding: 25px;
     box-sizing: border-box;
     border: solid;
+    border-width: 1px;
+    border-color:#ccc;
     margin-top: 25px;
+}
+
+.saved-template h2{
+    margin-bottom: 10px;
+}
+
+.saved-template ul li{
+    list-style: none;
 }
 
 .template-footer-buttons{
