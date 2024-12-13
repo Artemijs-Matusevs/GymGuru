@@ -88,7 +88,10 @@ const newTemplate = async (userId, templateName, exerciseData) => {
 
 //Delete template
 const deleteTemplate = async (templateId) => {
+    //Get list of all exercise ID's
+    const exerciseIdList = await workoutModel.fetchAllExerciseId(templateId);
 
+    console.log(exerciseIdList);
 };
 
 
@@ -164,4 +167,5 @@ export default{
     getNamesAllExercises,
     newTemplate,
     getUserTemplates,
+    deleteTemplate
 }

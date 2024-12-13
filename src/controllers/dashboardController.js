@@ -52,6 +52,12 @@ const dashboardController = {
         let alertMessage = `Template '${req.body.template_name}' has been created`
         req.session.alertMessage = alertMessage;
         res.status(200).json({redirectUrl: '/dashboard'});
+    },
+
+    //DELETE workout template
+    deleteWorkoutTemplate: async (req, res) => {
+        //console.log(req.template_id);
+        await dashboardService.deleteTemplate(req.template_id);
     }
 }
 

@@ -18,4 +18,7 @@ router.get('/measurements', authController.isAuthenticated, dashboardController.
 //Post new workout template details
 router.post('/new-template', authController.isAuthenticated, dashboardController.newWorkoutTemplate);
 
+//Delete workout
+router.delete('/delete-template', authController.isAuthenticated, dashboardController.deleteWorkoutTemplate);
+
 export default router;
