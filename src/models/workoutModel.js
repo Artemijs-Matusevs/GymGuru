@@ -51,6 +51,32 @@ const addNewSet = async(template_exercise_id, set_number, weight, previous, reps
     }
 };
 
+//DELETION
+//Delete all sets of a template exercise
+const deleteAllSets = async(template_exercise_id) => {
+    try{
+        const result = await db.query(`
+                                        DELETE FROM exercise_sets
+                                        WHERE template_exercise_id = $1`, [template_exercise_id]);
+    }catch(err){
+        console.log("Error deleting sets", err);
+    }
+};
+
+//Delete all exercises
+const deleteAllExercises = async(template_id) => {
+    try{
+        const result = await db.query(`
+                                        DELETE FROM template_exercises
+                                        WHERE template_id = $1`, [template_id]);
+    }catch(err){
+        console.log("Error deleting exercises", err);
+    }
+};
+
+//Delete template
+
+
 //Feth all templates for a user
 const fetchUserTemplates = async(user_id) => {
     try{
@@ -103,5 +129,7 @@ export default{
     addNewSet,
     fetchUserTemplates,
     fetchTemplateExercises,
-    fetchNumOfSets
+    fetchNumOfSets,
+    deleteAllSets,
+    deleteAllExercises
 }
