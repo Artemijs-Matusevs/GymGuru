@@ -86,6 +86,11 @@ const newTemplate = async (userId, templateName, exerciseData) => {
     }
 };
 
+//Delete template
+const deleteTemplate = async (templateId) => {
+
+};
+
 
 //Get list of all user templates
 const getUserTemplates = async (user_id) => {

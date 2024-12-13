@@ -1,5 +1,6 @@
 import db from '../config/database.js';
 
+//Retrieve list of all stored exercises in the db
 const getAllExercises = async ()=> {
     try{
         const result = await db.query(`
@@ -12,6 +13,8 @@ const getAllExercises = async ()=> {
         console.log(`Error getting all exercises from dataset:${err.essage}`);
     }
 };
+
+
 
 //Create new record for the new workout template
 const addNewWorkoutTemplate = async(user_id, template_name) => {
@@ -77,6 +80,20 @@ const deleteAllExercises = async(template_id) => {
 //Delete template
 
 
+//FETCHING
+//Get a list of all exercise ID's for a specific template
+const fetchAllExerciseId = async(template_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT *
+                                        FROM template_exercises
+                                        WHERE template_id = $1`, [template_id]);
+        return result.rows;
+    }catch(err){
+        console.log("Error fetching exercise ID's", err);
+    }
+}
+
 //Feth all templates for a user
 const fetchUserTemplates = async(user_id) => {
     try{
@@ -131,5 +148,6 @@ export default{
     fetchTemplateExercises,
     fetchNumOfSets,
     deleteAllSets,
-    deleteAllExercises
+    deleteAllExercises,
+    fetchAllExerciseId
 }
