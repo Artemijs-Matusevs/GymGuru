@@ -179,9 +179,11 @@
 }
 
 #template-exercise-list{
-    width: 500px;
+    width: 550px;
     height: 61vh;
     overflow-y: auto;
+    padding-right: 5px;
+    box-sizing: border-box;
 }
 
 .template-save-cancel-buttons{
@@ -221,6 +223,11 @@
 
 .saved-template ul li{
     list-style: none;
+}
+
+.saved-template-buttons{
+    justify-content: end;
+    gap: 25px;
 }
 
 .template-footer-buttons{
