@@ -124,16 +124,16 @@ function workoutPartial(){
     //Delete template
     $(document).on("click", ".delete-workout-button", function() {
 
-        alert("Test");
+        //alert("Test");
 
         //Get the ID of the template
         let parentDiv = $(this).closest('.saved-template');
-        let template_id = parentDiv.dataset.templateId;
+        let template_id = parentDiv.attr('template-id')
 
 
         //Prepare form
         const formData = new FormData();
-        FormData.append('template_id', template_id);
+        formData.append('template_id', template_id);
 
         //send DELETE request
         $.ajax({

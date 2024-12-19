@@ -7,7 +7,7 @@
             <div class="saved-templates-list">
                 <% if (locals.userTemplates && locals.userTemplates.length > 0) { %>
                     <% userTemplates.forEach(template => { %>
-                        <div class="saved-template" data-template_id="<%=template.template_id%>">
+                        <div class="saved-template" template-id="<%=template.template_id%>">
                             <h2 class="partials-subtitle"> <%= template.template_name %> </h2>
                             <% if (Array.isArray(template.exercises) && template.exercises.length > 0) { %>
                                 <ul>
