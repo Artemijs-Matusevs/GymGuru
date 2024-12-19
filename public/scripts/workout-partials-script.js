@@ -134,8 +134,8 @@ function workoutPartial(){
         $.ajax({
             url: `/delete-template?template_id=${template_id}`,
             type: 'DELETE',
-            sucess: function (response){
-                window.location.href = response.redirectURL;
+            success: function (response){
+                window.location.href = response.redirectUrl;
             },
             error: function (xhr, status, error){
                 console.error('Failed to delete template:', error);

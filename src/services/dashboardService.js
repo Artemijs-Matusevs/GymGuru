@@ -88,11 +88,30 @@ const newTemplate = async (userId, templateName, exerciseData) => {
 
 //Delete template
 const deleteTemplate = async (templateId) => {
-    //Get list of all exercise ID's
-    const exerciseIdList = await workoutModel.fetchAllExerciseId(templateId);
+    try {
+        //Get the list of all exercise IDs for the template
+        const exerciseIdList = await workoutModel.fetchTemplateExercises(templateId);
+        
+        if (Array.isArray(exerciseIdList) && exerciseIdList.length > 0) {
+            //Delete all sets for each exercise concurrently
+            const deleteSetsPromises = exerciseIdList.map(async (exercise) => {
+                const templateExerciseId = exercise.template_exercise_id;
+                return workoutModel.deleteAllSets(templateExerciseId);
+            });
+            await Promise.all(deleteSetsPromises);
+        }
 
-    console.log(templateId);
-    console.log(exerciseIdList);
+        //Delete all exercises for the template
+        await workoutModel.deleteAllExercises(templateId);
+
+        //Delete the template and return its name
+        const templateName = await workoutModel.deleteTemplate(templateId);
+        return templateName;
+
+    } catch (error) {
+        console.error('Error deleting template:', error);
+        throw new Error('Failed to delete template. Please try again.');
+    }
 };
 
 

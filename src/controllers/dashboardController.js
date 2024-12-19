@@ -49,15 +49,20 @@ const dashboardController = {
         await dashboardService.newTemplate(req.user.id, req.body.template_name, req.body.exercises);
 
         //send new alert message
-        let alertMessage = `Template '${req.body.template_name}' has been created`
+        let alertMessage = `Template '${req.body.template_name}' has been created`;
         req.session.alertMessage = alertMessage;
         res.status(200).json({redirectUrl: '/dashboard'});
     },
 
     //DELETE workout template
     deleteWorkoutTemplate: async (req, res) => {
-        console.log(req.query.template_id);
-        //await dashboardService.deleteTemplate(req.template_id);
+        //console.log(req.query.template_id);
+        const templateName = await dashboardService.deleteTemplate(req.query.template_id);
+
+        //Send new alert message
+        let alertMessage = `Template '${templateName}' has been deleted`;
+        req.session.alertMessage = alertMessage;
+        res.status(200).json({redirectUrl: '/dashboard'})
     }
 }
 

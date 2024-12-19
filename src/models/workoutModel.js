@@ -77,23 +77,21 @@ const deleteAllExercises = async(template_id) => {
     }
 };
 
-//Delete template
-
-
-//FETCHING
-//Get a list of all exercise ID's for a specific template
-const fetchAllExerciseId = async(template_id) => {
+const deleteTemplate = async(template_id) => {
     try{
         const result = await db.query(`
-                                        SELECT *
-                                        FROM template_exercises
-                                        WHERE template_id = $1`, [template_id]);
-        return result.rows;
+                                        DELETE FROM workout_templates
+                                        WHERE template_id = $1
+                                        RETURNING template_name`, [template_id]);
+        return result.rows[0].template_name;
     }catch(err){
-        console.log("Error fetching exercise ID's", err);
+        console.log("Error deleting template", err);
     }
 }
 
+
+
+//FETCHING
 //Feth all templates for a user
 const fetchUserTemplates = async(user_id) => {
     try{
@@ -124,6 +122,8 @@ const fetchTemplateExercises = async(template_id) => {
     }
 }
 
+//Fetch
+
 //Fetch number of sets for a specific template exercise
 const fetchNumOfSets = async(template_exercise_id) => {
     try{
@@ -149,5 +149,5 @@ export default{
     fetchNumOfSets,
     deleteAllSets,
     deleteAllExercises,
-    fetchAllExerciseId
+    deleteTemplate
 }
