@@ -145,6 +145,11 @@
     gap: 15px;
 }
 
+/* Exercise search bar */
+.search-bar{
+    color: black;
+}
+
 /* Exercise table */
 .exercise-table{
     display: grid;

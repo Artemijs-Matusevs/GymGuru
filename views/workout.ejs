@@ -63,6 +63,10 @@
         <!-- EXERCISES LIST -->
         <div class="exercise-list">
             <h2 class="partials-subtitle">Exercise List</h2>
+
+            <!-- Search bar -->
+             <input type="text" id="exercise-search-bar" class="search-bar" placeholder="search exercises...">
+
             <ul>
                 <% 
                 let currentLetter = '';
@@ -76,7 +80,7 @@
                 <%
                     }
                 %>
-                    <li exercise-id="<%=exerciseList[i].id%>" class="exercise"><%=exerciseList[i].name%></li>
+                    <li exercise-id="<%=exerciseList[i].id%>" data-name="<%=exerciseList[i].name.toLowerCase()%>" class="exercise"><%=exerciseList[i].name%></li>
                 <%
                 }
                 %>

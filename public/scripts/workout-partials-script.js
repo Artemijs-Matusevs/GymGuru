@@ -145,6 +145,33 @@ function workoutPartial(){
         })
     });
 
+    $("#exercise-search-bar").on("input", function () {
+        const searchValue = $(this).val().toLowerCase();
+    
+        if (searchValue === "") {
+            // Show all alphabet titles and exercises when the search bar is empty
+            $(".alphabet-title").show();
+            $(".exercise").show();
+        } else {
+            // Hide all alphabet titles initially
+            $(".alphabet-title").hide();
+    
+            // Filter exercises
+            $(".exercise").each(function () {
+                const exerciseName = $(this).data("name");
+                if (exerciseName.includes(searchValue)) {
+                    $(this).show();
+    
+                    // Show the corresponding alphabet title
+                    $(this).prevAll(".alphabet-title:first").show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+    
+
 
 
 
