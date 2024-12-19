@@ -55,10 +55,12 @@ function workoutPartial(){
         let divId = exerciseName.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
         let htmlTable = `
             <div class="exercise-table-container" id="${divId}">
-                <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title template-exercise"> ${exerciseName}</h2>
                 <div class="exercise-header">
-                    <h2 class="partials-subtitle partials-button add-set-button"> Add Set + </h2>
-                    <h2 class="partials-subtitle partials-button remove-exercise"> Remove Exercise ×</h2>
+                    <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title template-exercise"> ${exerciseName}</h2>
+                    <div class="exercise-header-buttons">
+                        <ion-icon class="partials-icon-button add-set-button" name="add-circle"></ion-icon>
+                        <ion-icon class="partials-icon-button remove-exercise" name="trash-bin"></ion-icon>
+                    </div>
                 </div>
                 <div class="exercise-table">
                     <div class="table-row header">
@@ -78,7 +80,7 @@ function workoutPartial(){
 
     //Remove exercise
     $(document).on("click", ".remove-exercise", function() {
-        let parentId = $(this).parents().eq(1).attr('id');
+        let parentId = $(this).parents().eq(2).attr('id');
 
         $("#" + parentId).remove();
     })
