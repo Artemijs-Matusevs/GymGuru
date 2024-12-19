@@ -56,8 +56,8 @@ const dashboardController = {
 
     //DELETE workout template
     deleteWorkoutTemplate: async (req, res) => {
-        //console.log(req.template_id);
-        await dashboardService.deleteTemplate(req.template_id);
+        console.log(req.query.template_id);
+        //await dashboardService.deleteTemplate(req.template_id);
     }
 }
 

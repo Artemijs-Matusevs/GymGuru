@@ -130,18 +130,10 @@ function workoutPartial(){
         let parentDiv = $(this).closest('.saved-template');
         let template_id = parentDiv.attr('template-id')
 
-
-        //Prepare form
-        const formData = new FormData();
-        formData.append('template_id', template_id);
-
         //send DELETE request
         $.ajax({
-            url: '/delete-template',
+            url: `/delete-template?template_id=${template_id}`,
             type: 'DELETE',
-            data: formData,
-            processData: false,
-            contentType: false,
             sucess: function (response){
                 window.location.href = response.redirectURL;
             },

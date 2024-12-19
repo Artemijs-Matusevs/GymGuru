@@ -91,6 +91,7 @@ const deleteTemplate = async (templateId) => {
     //Get list of all exercise ID's
     const exerciseIdList = await workoutModel.fetchAllExerciseId(templateId);
 
+    console.log(templateId);
     console.log(exerciseIdList);
 };
 
