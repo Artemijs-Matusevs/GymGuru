@@ -118,7 +118,42 @@ function workoutPartial(){
         table.find('.table-row').not('.header').each(function(index) {
             $(this).find('.cell').first().text(index + 1);
         })
-    })
+    });
+
+
+    //Delete template
+    $(document).on("click", ".delete-workout-button", function() {
+
+        alert("Test");
+
+        //Get the ID of the template
+        let parentDiv = $(this).closest('.saved-template');
+        let template_id = parentDiv.dataset.templateId;
+
+
+        //Prepare form
+        const formData = new FormData();
+        FormData.append('template_id', template_id);
+
+        //send DELETE request
+        $.ajax({
+            url: '/delete-template',
+            type: 'DELETE',
+            data: formData,
+            processData: false,
+            contentType: false,
+            sucess: function (response){
+                window.location.href = response.redirectURL;
+            },
+            error: function (xhr, status, error){
+                console.error('Failed to delete template:', error);
+            }
+        })
+    });
+
+
+
+
 
     //Post new template to back-end
     $("#submit-new-template").on("click", function() {
@@ -148,7 +183,6 @@ function workoutPartial(){
             };
         }).get();
 
-
         //Make the post request to the back-end with data of the new workout template
         $.ajax({
             url: '/new-template',
@@ -162,7 +196,8 @@ function workoutPartial(){
                 console.log(err);
             }
         })
-    })
+    });
 
- 
+
+
 }
