@@ -122,7 +122,19 @@ const fetchTemplateExercises = async(template_id) => {
     }
 }
 
-//Fetch
+//Fetch all sets for a saved template exercise
+const fetchAllSets = async(template_exercise_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT *
+                                        FROM exercise_sets
+                                        WHERE template_exercise_id = $1
+                                        ORDER BY set_number ASC;`, [template_exercise_id]);
+        return result.rows;
+    }catch(err){
+        console.log(`Error fetching all sets for specific exercise: ${err.message}`);
+    }
+}
 
 //Fetch number of sets for a specific template exercise
 const fetchNumOfSets = async(template_exercise_id) => {
@@ -149,5 +161,6 @@ export default{
     fetchNumOfSets,
     deleteAllSets,
     deleteAllExercises,
-    deleteTemplate
+    deleteTemplate,
+    fetchAllSets,
 }

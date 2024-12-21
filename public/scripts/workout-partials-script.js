@@ -144,9 +144,31 @@ function workoutPartial(){
     //Edit saved template
     $(document).on("click", ".edit-workout-button", function() {
 
+        //Get parent container and template name
+        const parentContainer = $(this).closest(".saved-template");
+        const template_id = parentContainer.attr('template-id');
+        //const templateName = parentContainer.find(".partials-subtitle").text();
+
+        //Make Ajax call to get saved template details
+        //send GET request
+        $.ajax({
+            url: `/get-template?template_id=${template_id}`,
+            type: 'GET',
+            success: function (response){
+                //Populate the field
+            },
+            error: function (xhr, status, error){
+                console.error('Failed to delete template:', error);
+            }
+        })
+
+        $(".template-name").text(templateName);
+        $(".template-name-field").val(templateName);
+
         //Hide main content and display the new template content
         $("#partials-content-workout").hide();
         $("#partials-new-template").css("display", "flex");
+
     })
 
     $("#exercise-search-bar").on("input", function () {

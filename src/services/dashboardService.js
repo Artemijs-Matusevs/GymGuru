@@ -161,7 +161,43 @@ const getUserTemplates = async (user_id) => {
     //Testing
     //console.log(templateData[0].exercises);
     return templatesData;
-}   
+};
+
+//Get template details
+const getTemplate = async (template_id) => {
+    let exercises = await workoutModel.fetchTemplateExercises(template_id);
+    let templateData = [];
+
+    //Check if exercises exist
+    if (Array.isArray(exercises) && exercises.length > 0){
+        //Wat for all data to be processed
+        templateData = await Promise.all(
+            exercises.map(async (exercise) => {
+                // Fetch all sets for th especific exercise
+                let sets = await workoutModel.fetchAllSets(exercise.template_exercise_id);
+                //console.log(sets);
+
+                //If sets exist, add to the object
+                if (Array.isArray(sets) && sets.length > 0){
+                    return {
+                        exercise_id: exercise.template_exercise_id,
+                        exercise_name: exercise.exercise_name,
+                        sets: sets,
+                    };
+                }else {
+                    return{
+                        exercise_id: exercise.template_exercise_id,
+                        exercise_name: exercise.exercise_name,
+                        sets: [],
+                    }
+                }
+            })
+        )
+    }
+
+    //Return template data
+    return templateData;
+};
 
 
 //NOT EXPORTS
@@ -176,7 +212,7 @@ const newExercise = async (template_id, exercise_id, order_position) => {
 const newSet = async (template_exercise_id, set_number, weight, previous, reps) => {
     await workoutModel.addNewSet(template_exercise_id, set_number, weight, previous, reps);
     console.log(`New set added, set number:${set_number}`);
-}
+};
 
 
 
@@ -187,5 +223,6 @@ export default{
     getNamesAllExercises,
     newTemplate,
     getUserTemplates,
-    deleteTemplate
+    deleteTemplate,
+    getTemplate,
 }

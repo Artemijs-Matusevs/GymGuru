@@ -15,6 +15,9 @@ router.get('/history', authController.isAuthenticated, dashboardController.histo
 router.get('/calories', authController.isAuthenticated, dashboardController.calories);
 router.get('/measurements', authController.isAuthenticated, dashboardController.measurements);
 
+//Get specific saved template details
+router.get('/get-template', authController.isAuthenticated, dashboardController.getWorkoutTemplate);
+
 //Post new workout template details
 router.post('/new-template', authController.isAuthenticated, dashboardController.newWorkoutTemplate);
 

@@ -63,6 +63,13 @@ const dashboardController = {
         let alertMessage = `Template '${templateName}' has been deleted`;
         req.session.alertMessage = alertMessage;
         res.status(200).json({redirectUrl: '/dashboard'})
+    },
+
+    //GET workout template details
+    getWorkoutTemplate: async (req, res) => {
+        const template = await dashboardService.getTemplate(req.query.template_id);
+
+        //console.log(template[0].sets);
     }
 }
 
