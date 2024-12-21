@@ -145,9 +145,20 @@
     gap: 15px;
 }
 
+.exercise-list-header{
+    display: flex;
+    align-items: center !important;
+    justify-content: space-between;
+}
+
 /* Exercise search bar */
 .search-bar{
     color: black;
+    height: 10px;
+    margin: auto 0;
+    box-shadow: 0 0 5px #23201E;
+    font-size: 15px;
+    text-align: right;
 }
 
 /* Exercise table */
