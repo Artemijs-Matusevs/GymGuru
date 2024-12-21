@@ -68,6 +68,7 @@ const dashboardController = {
     //GET workout template details
     getWorkoutTemplate: async (req, res) => {
         const template = await dashboardService.getTemplate(req.query.template_id);
+        res.status(200).json({template: template});
 
         //console.log(template[0].sets);
     }

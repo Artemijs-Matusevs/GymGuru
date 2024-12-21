@@ -164,7 +164,7 @@
 /* Exercise table */
 .exercise-table{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
     gap: 10px;
     width: 100%;
     background-color: #f2f2f2;

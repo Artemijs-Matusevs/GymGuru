@@ -44,11 +44,11 @@ const addNewExercise = async(template_id, exercise_id, order_position) => {
 };
 
 //Add new set to template_exercise
-const addNewSet = async(template_exercise_id, set_number, weight, previous, reps) => {
+const addNewSet = async(template_exercise_id, set_number, weight, reps) => {
     try{
         const result = await db.query(`
-                                        INSERT INTO exercise_sets (template_exercise_id, set_number, weight, previous, reps)
-                                        VALUES ($1, $2, $3, $4, $5)`, [template_exercise_id, set_number, weight, previous, reps]);
+                                        INSERT INTO exercise_sets (template_exercise_id, set_number, weight, reps)
+                                        VALUES ($1, $2, $3, $4)`, [template_exercise_id, set_number, weight, reps]);
     }catch(err){
         console.log("Error adding new set to DB", err.message);
     }
@@ -110,7 +110,7 @@ const fetchUserTemplates = async(user_id) => {
 const fetchTemplateExercises = async(template_id) => {
     try{
         const result = await db.query(`
-                                        SELECT e.exercise_name, te.template_exercise_id
+                                        SELECT e.exercise_name, te.template_exercise_id, te.order_position
                                         FROM template_exercises te
                                         JOIN exercises_dataset e ON te.exercise_id = e.exercise_id
                                         WHERE te.template_id = $1

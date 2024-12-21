@@ -61,8 +61,7 @@ function workoutPartial(){
                 <div class="exercise-table">
                     <div class="table-row header">
                         <div class="cell">Set</div>
-                        <div class="cell">Previous</div>
-                        <div class="cell">Current</div>
+                        <div class="cell">Weight</div>
                         <div class="cell">Reps</div>
                         <div class="cell"></div>
                     </div>
@@ -93,7 +92,6 @@ function workoutPartial(){
         let newRow = `
             <div class="table-row exercise-set">
                 <div class="cell exercise-set-number">${currentSetNumber}</div>
-                <div class="cell"><input class="exercise-previous-weight" placeholder="kg" value="0" type="number"></div>
                 <div class="cell"><input class="exercise-current-weight" placeholder="kg" value="0" type="number"></div>
                 <div class="cell"><input class="exercise-reps" value="0" type="number"></div>
                 <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
@@ -147,7 +145,7 @@ function workoutPartial(){
         //Get parent container and template name
         const parentContainer = $(this).closest(".saved-template");
         const template_id = parentContainer.attr('template-id');
-        //const templateName = parentContainer.find(".partials-subtitle").text();
+        const templateName = parentContainer.find(".partials-subtitle").text();
 
         //Make Ajax call to get saved template details
         //send GET request
@@ -156,19 +154,66 @@ function workoutPartial(){
             type: 'GET',
             success: function (response){
                 //Populate the field
+                response.template.forEach((exercise) => {
+
+                    let divId = exercise.exercise_name.replace(/[^a-zA-Z0-9-_]/g, '-').toLowerCase() + "-" + Date.now();
+
+                    let htmlTable = `
+                    <div class="exercise-table-container" id="${divId}">
+                        <div class="exercise-header">
+                            <h2 exercise-order="${exercise.exercise_order}" exercise-id="${exercise.exercise_id}" class="partials-subtitle exercise-title template-exercise"> ${exercise.exercise_name}</h2>
+                            <div class="exercise-header-buttons">
+                                <ion-icon class="partials-icon-button add-set-button" name="add-circle"></ion-icon>
+                                <ion-icon class="partials-icon-button remove-exercise" name="trash-bin"></ion-icon>
+                            </div>
+                        </div>
+                        <div class="exercise-table">
+                            <div class="table-row header">
+                                <div class="cell">Set</div>
+                                <div class="cell">Weight</div>
+                                <div class="cell">Reps</div>
+                                <div class="cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+        
+                    //Insert the html 
+                    $("#template-exercise-list").append(htmlTable);
+
+                    exercise.sets.forEach((set) => {
+                        //Find the exercise table the button is associated with in the DOM
+                        let table = $(`#${divId}`).find(".exercise-table");
+
+                        console.log(set);
+
+                        //New set row
+                        let newRow = `
+                            <div class="table-row exercise-set">
+                                <div class="cell exercise-set-number">${set.set_number}</div>
+                                <div class="cell"><input class="exercise-current-weight" placeholder="kg" value="${set.weight}" type="number"></div>
+                                <div class="cell"><input class="exercise-reps" value="${set.reps}" type="number"></div>
+                                <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
+                            </div>
+                        `
+
+                        //Append to the table
+                        table.append(newRow);
+                    })
+                });
+
+                //Change template name input field and sub-title          
+                $(".template-name").text(templateName);
+                $(".template-name-field").val(templateName);
+
+                //Hide main content and display the edit template content
+                $("#partials-content-workout").hide();
+                $("#partials-new-template").css("display", "flex");
             },
             error: function (xhr, status, error){
                 console.error('Failed to delete template:', error);
             }
         })
-
-        $(".template-name").text(templateName);
-        $(".template-name-field").val(templateName);
-
-        //Hide main content and display the new template content
-        $("#partials-content-workout").hide();
-        $("#partials-new-template").css("display", "flex");
-
     })
 
     $("#exercise-search-bar").on("input", function () {

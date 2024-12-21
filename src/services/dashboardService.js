@@ -78,8 +78,8 @@ const newTemplate = async (userId, templateName, exerciseData) => {
             //Add each set of the exercise to the sets table
             if(Array.isArray(exercise.sets) && exercise.sets.length > 0){
                 exercise.sets.forEach(set => {
-                    //console.log(set.setNumber, set.weight, set.previous, set.reps);
-                    newSet(template_exercise_id, set.setNumber, set.weight, set.previous, set.reps);
+                    //console.log(set.setNumber, set.weight,  set.reps);
+                    newSet(template_exercise_id, set.setNumber, set.weight, set.reps);
                 });
             }
         });
@@ -182,12 +182,14 @@ const getTemplate = async (template_id) => {
                     return {
                         exercise_id: exercise.template_exercise_id,
                         exercise_name: exercise.exercise_name,
+                        exercise_order: exercise.order_position,
                         sets: sets,
                     };
                 }else {
                     return{
                         exercise_id: exercise.template_exercise_id,
                         exercise_name: exercise.exercise_name,
+                        exercise_order: exercise.order_position,
                         sets: [],
                     }
                 }
@@ -209,8 +211,8 @@ const newExercise = async (template_id, exercise_id, order_position) => {
 };
 
 //Insert new set
-const newSet = async (template_exercise_id, set_number, weight, previous, reps) => {
-    await workoutModel.addNewSet(template_exercise_id, set_number, weight, previous, reps);
+const newSet = async (template_exercise_id, set_number, weight, reps) => {
+    await workoutModel.addNewSet(template_exercise_id, set_number, weight, reps);
     console.log(`New set added, set number:${set_number}`);
 };
 
