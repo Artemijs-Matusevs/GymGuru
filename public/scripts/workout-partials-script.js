@@ -1,18 +1,14 @@
 function workoutPartial(){
-    const templateCancelButton = document.getElementById('template-cancel');
-    const newTemplateContent = document.getElementById('partials-new-template');
-    
-    const newTemplateButton = document.getElementById('new-template');
-    const mainContent = document.getElementById('partials-content-workout');
-    
-    newTemplateButton.addEventListener('click', function() {
-        mainContent.style.display = "none";
-        newTemplateContent.style.display = "flex";
+    //Get new template section
+    $("#new-template").on('click', function() {
+        $("#partials-content-workout").hide();
+        $("#partials-new-template").css("display", "flex");
     })
 
-    templateCancelButton.addEventListener('click', function() {
-        mainContent.style.display = "block";
-        newTemplateContent.style.display = "none";
+    //Cancel template and reset template name etc...
+    $("#template-cancel").on('click', function() {
+        $("#partials-content-workout").css("display", "block");
+        $("#partials-new-template").hide();
         $("#template-exercise-list").html("");
         $(".template-name").text("Workout Template");
         $(".template-name-field").val("Workout Template");
@@ -145,6 +141,14 @@ function workoutPartial(){
         })
     });
 
+    //Edit saved template
+    $(document).on("click", ".edit-workout-button", function() {
+
+        //Hide main content and display the new template content
+        $("#partials-content-workout").hide();
+        $("#partials-new-template").css("display", "flex");
+    })
+
     $("#exercise-search-bar").on("input", function () {
         const searchValue = $(this).val().toLowerCase();
     
@@ -171,10 +175,6 @@ function workoutPartial(){
         }
     });
     
-
-
-
-
 
     //Post new template to back-end
     $("#submit-new-template").on("click", function() {
