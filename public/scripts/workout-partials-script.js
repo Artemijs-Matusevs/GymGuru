@@ -2,6 +2,11 @@ function workoutPartial(){
     //Get new template section
     $("#new-template").on('click', function() {
         $("#partials-content-workout").hide();
+
+        //Swtich submition buttons (Edit template/New template)
+        $("#submit-new-template").show();
+        $("#submit-edit-template").hide();
+
         $("#partials-new-template").css("display", "flex");
     })
 
@@ -209,6 +214,10 @@ function workoutPartial(){
                 //Hide main content and display the edit template content
                 $("#partials-content-workout").hide();
                 $("#partials-new-template").css("display", "flex");
+
+                //Swtich submition buttons (Edit template/New template)
+                $("#submit-new-template").hide();
+                $("#submit-edit-template").show();
             },
             error: function (xhr, status, error){
                 console.error('Failed to delete template:', error);
@@ -285,6 +294,8 @@ function workoutPartial(){
             }
         })
     });
+
+    //POST changes to edit template on the back-end
 
 
 
