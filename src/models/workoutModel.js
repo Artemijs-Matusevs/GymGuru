@@ -150,6 +150,20 @@ const fetchNumOfSets = async(template_exercise_id) => {
     }
 }
 
+//UPDATE
+const updateTemplateName = async(template_name, template_id) => {
+    try{
+        const result = await db.query(`
+                                        UPDATE workout_templates
+                                        SET template_name = $1
+                                        WHERE template_id = $2
+                                        RETURNING template_name`, [template_name, template_id]);
+        return result.rows[0].template_name;
+    }catch(err){
+        console.log(`Error updating name of template: ${err.message}`);
+    }
+}
+
 //exports
 export default{
     getAllExercises,
@@ -163,4 +177,5 @@ export default{
     deleteAllExercises,
     deleteTemplate,
     fetchAllSets,
+    updateTemplateName
 }

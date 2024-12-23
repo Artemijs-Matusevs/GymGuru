@@ -152,6 +152,8 @@ function workoutPartial(){
         const template_id = parentContainer.attr('template-id');
         const templateName = parentContainer.find(".partials-subtitle").text();
 
+        $("#submit-edit-template").attr('template-id', template_id);
+
         //Make Ajax call to get saved template details
         //send GET request
         $.ajax({
@@ -266,7 +268,6 @@ function workoutPartial(){
             let sets = $(this).closest(".exercise-table-container").find(".exercise-set").map(function() {
                 return {
                     setNumber: $(this).find(".exercise-set-number").text(),
-                    previous: $(this).find(".exercise-previous-weight").val(),
                     weight: $(this).find(".exercise-current-weight").val(),
                     reps: $(this).find(".exercise-reps").val(),
 
@@ -295,7 +296,51 @@ function workoutPartial(){
         })
     });
 
-    //POST changes to edit template on the back-end
+
+
+    //update template
+    $("#submit-edit-template").on("click", function() {
+        //Get name of new template
+        let templateId = $("#submit-edit-template").attr('template-id');
+        let workoutName = $(".template-name").text();
+        //alert(templateId);
+
+        //Get all exercise ID's and order and convert to jQuery object
+        let exercises = $(".template-exercise").map(function() {
+            let exerciseId = $(this).attr("exercise-id");
+            let order = $(this).attr("exercise-order");
+
+            //Get sets associated with each exercise
+            let sets = $(this).closest(".exercise-table-container").find(".exercise-set").map(function() {
+                return {
+                    setNumber: $(this).find(".exercise-set-number").text(),
+                    weight: $(this).find(".exercise-current-weight").val(),
+                    reps: $(this).find(".exercise-reps").val(),
+
+                }
+            }).get();
+
+            return {
+                id: exerciseId,
+                order: order,
+                sets: sets
+            };
+        }).get();
+
+        //Make the post request to the back-end with data of the new workout template
+        $.ajax({
+            url: '/edit-template',
+            type: 'PUT',
+            data: {template_name: workoutName, template_id: templateId, exercises: exercises},
+            success: function(response) {
+                console.log("New template posted")
+                window.location.href = response.redirectUrl;
+            },
+            error: function (xhr, status, err) {
+                console.log(err);
+            }
+        })
+    })
 
 
 

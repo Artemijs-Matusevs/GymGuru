@@ -65,6 +65,18 @@ const dashboardController = {
         res.status(200).json({redirectUrl: '/dashboard'})
     },
 
+    //PUT workout template
+    editWorkoutTemplate: async (req, res) => {
+        //Get template details
+        const newTemplateName = req.body.template_name;
+        const templateId = req.body.template_id;
+        const exercises = req.body.exercises;
+
+        //Update the template
+        await dashboardService.updateTemplate(newTemplateName, templateId, exercises);
+
+    },
+
     //GET workout template details
     getWorkoutTemplate: async (req, res) => {
         const template = await dashboardService.getTemplate(req.query.template_id);

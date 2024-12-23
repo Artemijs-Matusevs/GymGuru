@@ -21,6 +21,9 @@ router.get('/get-template', authController.isAuthenticated, dashboardController.
 //Post new workout template details
 router.post('/new-template', authController.isAuthenticated, dashboardController.newWorkoutTemplate);
 
+//Put replace existing workout template
+router.put('/edit-template', authController.isAuthenticated, dashboardController.editWorkoutTemplate);
+
 //Delete workout
 router.delete('/delete-template', authController.isAuthenticated, dashboardController.deleteWorkoutTemplate);
 

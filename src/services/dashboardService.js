@@ -86,6 +86,14 @@ const newTemplate = async (userId, templateName, exerciseData) => {
     }
 };
 
+//Update template
+const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
+    //Update template name 
+    const updatedTemplateName = await workoutModel.updateTemplateName(newTemplateName, templateId);
+
+    console.log(updatedTemplateName);
+}
+
 //Delete template
 const deleteTemplate = async (templateId) => {
     try {
@@ -201,7 +209,6 @@ const getTemplate = async (template_id) => {
     return templateData;
 };
 
-
 //NOT EXPORTS
 //Insert new exercise
 const newExercise = async (template_id, exercise_id, order_position) => {
@@ -227,4 +234,5 @@ export default{
     getUserTemplates,
     deleteTemplate,
     getTemplate,
+    updateTemplate,
 }
