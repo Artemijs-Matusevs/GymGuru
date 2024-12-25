@@ -57,7 +57,7 @@ function workoutPartial(){
         let htmlTable = `
             <div class="exercise-table-container" id="${divId}">
                 <div class="exercise-header">
-                    <h2 exercise-order="${order}" exercise-id="${exerciseId}" class="partials-subtitle exercise-title template-exercise"> ${exerciseName}</h2>
+                    <h2 exercise-order="${order}" template-exercise-id="0" exercise-id="${exerciseId}" class="partials-subtitle exercise-title template-exercise"> ${exerciseName}</h2>
                     <div class="exercise-header-buttons">
                         <ion-icon class="partials-icon-button add-set-button" name="add-circle"></ion-icon>
                         <ion-icon class="partials-icon-button remove-exercise" name="trash-bin"></ion-icon>
@@ -168,7 +168,7 @@ function workoutPartial(){
                     let htmlTable = `
                     <div class="exercise-table-container" id="${divId}">
                         <div class="exercise-header">
-                            <h2 exercise-order="${exercise.exercise_order}" exercise-id="${exercise.exercise_id}" class="partials-subtitle exercise-title template-exercise"> ${exercise.exercise_name}</h2>
+                            <h2 exercise-order="${exercise.exercise_order}" template-exercise-id="${exercise.exercise_id}" class="partials-subtitle exercise-title template-exercise"> ${exercise.exercise_name}</h2>
                             <div class="exercise-header-buttons">
                                 <ion-icon class="partials-icon-button add-set-button" name="add-circle"></ion-icon>
                                 <ion-icon class="partials-icon-button remove-exercise" name="trash-bin"></ion-icon>
@@ -307,6 +307,7 @@ function workoutPartial(){
 
         //Get all exercise ID's and order and convert to jQuery object
         let exercises = $(".template-exercise").map(function() {
+            let templateExerciseId = $(this).attr("template-exercise-id");
             let exerciseId = $(this).attr("exercise-id");
             let order = $(this).attr("exercise-order");
 
@@ -321,7 +322,8 @@ function workoutPartial(){
             }).get();
 
             return {
-                id: exerciseId,
+                template_exercise_id: templateExerciseId,
+                exercise_id: exerciseId,
                 order: order,
                 sets: sets
             };
