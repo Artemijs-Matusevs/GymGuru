@@ -91,7 +91,31 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
     //Update template name 
     const updatedTemplateName = await workoutModel.updateTemplateName(newTemplateName, templateId);
 
-    console.log(updatedTemplateName);
+    //Fetch all the exercises for the template
+    const oldExercises = await workoutModel.fetchTemplateExercises(templateId);
+
+    if(Array.isArray(exerciseData) && exerciseData.length > 0){
+        //get the ID's for comparison
+        const oldExerciseIds = oldExercises.map((ex) => parseInt(ex.template_exercise_id, 10));
+        const newExerciseIds = exerciseData.map((ex) => parseInt(ex.id), 10);
+
+        //Delete missing exercises
+        //Get Exercise IDs to be deleted
+        const exerciseIdsToRemove = oldExerciseIds.filter((id) => !newExerciseIds.includes(id));
+        for (const id of exerciseIdsToRemove){
+            //Remove all sets
+            await workoutModel.deleteAllSets(id);
+            //Remove the exercise
+            await workoutModel.deleteExercise(id);
+
+        }
+
+        console.log(exerciseIdsToRemove);
+    }else{
+        //DELETE ALL EXERCISES AND SETS
+        console.log("Delete all exercises");
+    }
+
 }
 
 //Delete template

@@ -89,6 +89,16 @@ const deleteTemplate = async(template_id) => {
     }
 }
 
+//Delete specificexercise by ID
+const deleteExercise = async(exercise_id) => {
+    try{
+        const result = await db.query(`
+                                        DELETE FROM template_exercises
+                                        WHERE template_exercise_id = $1`, [exercise_id]);
+    }catch(err){
+        console.log("Error deleting specific exercises", err);
+    }
+}
 
 
 //FETCHING
@@ -177,5 +187,6 @@ export default{
     deleteAllExercises,
     deleteTemplate,
     fetchAllSets,
-    updateTemplateName
+    updateTemplateName,
+    deleteExercise
 }
