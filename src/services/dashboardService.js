@@ -113,6 +113,16 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
         for (const exercise of exerciseData) {
             if(oldExerciseIds.includes(parseInt(exercise.template_exercise_id, 10))){
                 //UPDATE EXERCISE HERE
+                //Delete all sets
+                await workoutModel.deleteAllSets(exercise.template_exercise_id);
+
+                //Add new sets
+                if (Array.isArray(exercise.sets) && exercise.sets.length > 0){
+                    for (const set of exercise.sets){
+                        await workoutModel.addNewSet(exercise.template_exercise_id, set.setNumber, set.weight, set.reps);
+                    }
+                }
+
             }else{
                 //Add new exercise and return the new exercise ID
                 let newExerciseId = await workoutModel.addNewExercise(templateId, exercise.exercise_id, exercise.order);
@@ -126,7 +136,6 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
         }
     }else{
         //DELETE ALL EXERCISES AND SETS
-        console.log(oldExercises);
         for(const exercise of oldExercises){
             await workoutModel.deleteAllSets(exercise.template_exercise_id);
             await workoutModel.deleteExercise(exercise.template_exercise_id);
