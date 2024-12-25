@@ -73,7 +73,12 @@ const dashboardController = {
         const exercises = req.body.exercises;
 
         //Update the template
-        await dashboardService.updateTemplate(newTemplateName, templateId, exercises);
+        const templateName = await dashboardService.updateTemplate(newTemplateName, templateId, exercises);
+
+        //Send new alert message
+        let alertMessage = `Template '${templateName}' has been updated`;
+        req.session.alertMessage = alertMessage;
+        res.status(200).json({redirectUrl: '/dashboard'})
 
     },
 

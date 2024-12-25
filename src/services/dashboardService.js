@@ -126,8 +126,14 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
         }
     }else{
         //DELETE ALL EXERCISES AND SETS
-        console.log("Delete all exercises");
+        console.log(oldExercises);
+        for(const exercise of oldExercises){
+            await workoutModel.deleteAllSets(exercise.template_exercise_id);
+            await workoutModel.deleteExercise(exercise.template_exercise_id);
+        }
     }
+
+    return updatedTemplateName;
 
 }
 
