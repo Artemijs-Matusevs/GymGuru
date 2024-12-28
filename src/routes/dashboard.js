@@ -27,4 +27,8 @@ router.put('/edit-template', authController.isAuthenticated, dashboardController
 //Delete workout
 router.delete('/delete-template', authController.isAuthenticated, dashboardController.deleteWorkoutTemplate);
 
+//Start workout and get workout
+router.post('/start-workout', authController.isAuthenticated, dashboardController.startWorkout);
+router.get('/get-workout', authController.isAuthenticated, dashboardController.getCurrentWorkout);
+
 export default router;

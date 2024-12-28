@@ -90,18 +90,18 @@ const newTemplate = async (userId, templateName, exerciseData) => {
 const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
     //Update template name 
     const updatedTemplateName = await workoutModel.updateTemplateName(newTemplateName, templateId);
-
-    //Fetch all the exercises for the template
+    //Fetch all the currently saved exercises for the edited template
     const oldExercises = await workoutModel.fetchTemplateExercises(templateId);
 
+    //If the exercises sent exist and are an array loop through them
     if(Array.isArray(exerciseData) && exerciseData.length > 0){
-        //get the ID's for comparison
+        //get the ID's 
         const oldExerciseIds = oldExercises.map((ex) => parseInt(ex.template_exercise_id, 10));
         const newExerciseIds = exerciseData.map((ex) => parseInt(ex.template_exercise_id), 10);
-
-        //Delete missing exercises
         //Get Exercise IDs to be deleted
         const exerciseIdsToRemove = oldExerciseIds.filter((id) => !newExerciseIds.includes(id));
+
+        //Loop through the exercise Id's which need to be deleted, and remove them
         for (const id of exerciseIdsToRemove){
             //Remove all sets
             await workoutModel.deleteAllSets(id);
@@ -126,7 +126,7 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
             }else{
                 //Add new exercise and return the new exercise ID
                 let newExerciseId = await workoutModel.addNewExercise(templateId, exercise.exercise_id, exercise.order);
-                //ADD EACH SET
+                //Add each set for the new exercise
                 if(Array.isArray(exercise.sets) && exercise.sets.length > 0){
                     for(const set of exercise.sets){
                         await workoutModel.addNewSet(newExerciseId, set.setNumber, set.weight, set.reps);
@@ -134,7 +134,7 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
                 }
             }
         }
-    }else{
+    }else{//No exercises were sent from the front-end
         //DELETE ALL EXERCISES AND SETS
         for(const exercise of oldExercises){
             await workoutModel.deleteAllSets(exercise.template_exercise_id);
@@ -143,7 +143,6 @@ const updateTemplate = async (newTemplateName, templateId, exerciseData) => {
     }
 
     return updatedTemplateName;
-
 }
 
 //Delete template

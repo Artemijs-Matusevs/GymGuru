@@ -129,7 +129,7 @@ function workoutPartial(){
 
         //Get the ID of the template
         let parentDiv = $(this).closest('.saved-template');
-        let template_id = parentDiv.attr('template-id')
+        let template_id = parentDiv.attr('template-id');
 
         //send DELETE request
         $.ajax({
@@ -143,6 +143,30 @@ function workoutPartial(){
             }
         })
     });
+
+    //Start template
+    $(document).on("click", ".start-workout-button", function() {
+        //alert("TEST");
+
+        //Get the ID of the template
+        let parentDiv = $(this).closest('.saved-template');
+        let template_id = parentDiv.attr('template-id');
+
+        //alert(template_id);
+        //Send POST request to start new template
+        $.ajax({
+            url: '/start-workout',
+            type: 'POST',
+            data: {template_id: template_id},
+            success: function(response) {
+                console.log("New template started")
+                window.location.href = response.redirectUrl;
+            },
+            error: function (xhr, status, err) {
+                console.log(err);
+            }
+        })
+    })
 
     //Edit saved template
     $(document).on("click", ".edit-workout-button", function() {

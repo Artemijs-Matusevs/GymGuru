@@ -1,4 +1,5 @@
 import dashboardService from '../services/dashboardService.js';
+import workoutModel from '../models/workoutModel.js';
 
 const dashboardController = {
 
@@ -88,7 +89,35 @@ const dashboardController = {
         res.status(200).json({template: template});
 
         //console.log(template[0].sets);
-    }
+    },
+
+    //Start workout
+    startWorkout: async (req, res) => {
+        //Start a new workout here and redirect to get current workout
+        const templateId = req.body.template_id;
+        const userId = req.user.id;
+
+        //Start a new workout
+        const progress_id = await workoutModel.startWorkout(userId, templateId);
+
+        //Redirect
+        res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`})
+
+        //console.log(` template ID: ${templateId}, User Id: ${userId}`);
+    },
+
+    //GET current workout
+    getCurrentWorkout: async (req, res) => {
+
+        const progressId = req.params.progress_id;
+
+        //Get the in progress workout here
+
+        //Render the workout
+        res.render("current-workout.ejs")
+    },
+
+    //Update workout state
 }
 
 

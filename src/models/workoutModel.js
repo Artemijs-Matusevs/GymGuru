@@ -174,6 +174,30 @@ const updateTemplateName = async(template_name, template_id) => {
     }
 }
 
+//START A NEW IN PROGRESS WORKOUT
+const startWorkout = async(user_id, template_id) => {
+    try{
+        const result = await db.query(`
+                                        INSERT INTO in_progress_workouts (user_id, template_id)
+                                        VALUES ($1, $2)
+                                        RETURNING progress_id`, [user_id, template_id]);
+        return result.rows[0].progress_id;
+    }catch(err){
+        console.log(`Error starting a new workout: ${err.message}`);
+    }
+}
+
+//Add a completed set
+const finishSet = async(template_exercise_id, progress_id, set_number, weight, reps) => {
+    try{
+        const result = await db.query(`
+                                        INSERT INTO exercise_history_sets
+                                        VALUES ($1, $2, $3, $4, $5)` [template_exercise_id, progress_id, set_number, weight, reps]);                             
+    }catch(err){
+        console.log(`Error adding a finished set: ${err.message}`);
+    }
+}
+
 //exports
 export default{
     getAllExercises,
@@ -188,5 +212,7 @@ export default{
     deleteTemplate,
     fetchAllSets,
     updateTemplateName,
-    deleteExercise
+    deleteExercise,
+    startWorkout,
+    finishSet
 }
