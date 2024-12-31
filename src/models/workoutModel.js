@@ -198,6 +198,50 @@ const finishSet = async(template_exercise_id, progress_id, set_number, weight, r
     }
 }
 
+//Get the template ID from the progress workouts
+const getTemplateProgressId = async(progress_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT template_id
+                                        FROM in_progress_workouts
+                                        WHERE progress_id = $1`, [progress_id]);
+        return result.rows[0].template_id;
+    }catch(err){
+        console.log(`Error fetching template ID of an in-progress workout: ${err.message}`);
+    }
+}
+
+//Get template name
+const getTemplateName = async(template_id) => {
+    try{
+        const result = await db.query(`
+                                       SELECT template_name
+                                       FROM workout_templates
+                                       WHERE template_id = $1`, [template_id]);
+        return result.rows[0].template_name;
+    }catch(err){
+        console.log(`Error fetching name of template: ${err.message}`);
+    }
+}
+
+//Get completed sets
+const getCompletedSets = async(progress_id) => {
+    try{
+        const result = await db.query(`
+                                        SELECT *
+                                        FROM exercise_history_sets
+                                        WHERE progress_id = $1`, [progress_id]);
+        return result.rows;
+    }catch(err){
+        console.log(`Error, could fetch all compelted sets: ${err.message}`);
+    }
+}
+
+//Add new completed set
+const addCompletedSet = async(exercise_id, progress_id, set_number, weight, reps) =>{
+    //ADD NEW SETS HERE
+}
+
 //exports
 export default{
     getAllExercises,
@@ -214,5 +258,8 @@ export default{
     updateTemplateName,
     deleteExercise,
     startWorkout,
-    finishSet
+    finishSet,
+    getTemplateProgressId,
+    getTemplateName,
+    getCompletedSets,
 }

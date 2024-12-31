@@ -101,7 +101,7 @@ const dashboardController = {
         const progress_id = await workoutModel.startWorkout(userId, templateId);
 
         //Redirect
-        res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`})
+        res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`});
 
         //console.log(` template ID: ${templateId}, User Id: ${userId}`);
     },
@@ -109,12 +109,22 @@ const dashboardController = {
     //GET current workout
     getCurrentWorkout: async (req, res) => {
 
-        const progressId = req.params.progress_id;
+        //Get the in progress workout and template IDs
+        const progressId = req.query.progress_id;
+        const templateId = await workoutModel.getTemplateProgressId(progressId);
 
-        //Get the in progress workout here
+        //console.log(` template ID: ${templateId}, Progress Id: ${progressId}`);
+
+        //Get the raw original template
+        let templateName = await workoutModel.getTemplateName(templateId);
+        let rawTemplate = await dashboardService.getTemplate(templateId);
+
+        //Get any completed sets
+
+        //Replace any completed sets in the raw template
 
         //Render the workout
-        res.render("current-workout.ejs")
+        res.render("current-workout.ejs");
     },
 
     //Update workout state
