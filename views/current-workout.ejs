@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/current-workout.css">
     <title>GymTrack</title>
     <!-- ION ICONS -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -12,7 +12,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
-    <h1> TESTING! </h1>
+    <h1> <%=templateName%> </h1>
+    <% if (locals.template) {%>
+        <% template.forEach(exercise => { %>
+            <h2> <%= exercise.exercise_name %> </h2>
+            <div class="exercise-table">
+                <div class="table-row header">
+                    <div class="cell">Set</div>
+                    <div class="cell">Previous</div>
+                    <div class="cell">Weight</div>
+                    <div class="cell">Reps</div>
+                    <div class="cell"></div>
+                </div>
+
+                <% exercise.sets.forEach(set => { %>
+                    <div class="table-row exercise-set">
+                        <div class="cell exercise-set-number"><%=set.set_number%></div>
+                        <div class="cell exercise-set-number"></div>
+                        <div class="cell"><input class="exercise-current-weight" placeholder="kg" value="<%=set.weight%>" type="number"></div>
+                        <div class="cell"><input class="exercise-reps" value="<%=set.reps%>" type="number"></div>
+                        <div class="cell partials-button remove-set-button"><ion-icon name="trash-bin-outline"></ion-icon></div>
+                    </div>
+                <%}) %>
+
+            </div>
+        <% }) %>
+    <% } %>
 
 </body>
 </html>
+
+<!-- EXTERNAL JS SCRIPTS -->
+<script src="scripts/current-workout.js"></script>

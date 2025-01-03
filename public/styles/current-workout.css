@@ -1,0 +1,41 @@
+/* Exercise table */
+.exercise-table{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+    gap: 10px;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.exercise-table-container{
+    margin-bottom: 50px;
+}
+
+.table-row{
+    display: contents;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.cell{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.cell input[type="number"]{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    color: black;
+    margin: auto;
+}

@@ -118,16 +118,21 @@ const dashboardController = {
         //Get the raw original template
         let templateName = await workoutModel.getTemplateName(templateId);
         let rawTemplate = await dashboardService.getTemplate(templateId);
+        console.log(rawTemplate[0].sets);
 
         //Get any completed sets
+        let completedSets = await workoutModel.getCompletedSets(progressId);
 
         //Replace any completed sets in the raw template
 
         //Render the workout
-        res.render("current-workout.ejs");
+        res.render("current-workout.ejs", {templateName: templateName, template: rawTemplate});
     },
 
     //Update workout state
+    updateCurrentWorkout: async (req, res) => {
+        //UPDATE THE IN PROGRESS WORKOUT HERE
+    }
 }
 
 

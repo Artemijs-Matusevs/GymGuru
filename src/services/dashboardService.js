@@ -260,6 +260,11 @@ const getTemplate = async (template_id) => {
     return templateData;
 };
 
+//Function to replace raw template sets with comleted sets
+const replaceSets = async(rawTemplate, newSets) => {
+    
+}
+
 //NOT EXPORTS
 //Insert new exercise
 const newExercise = async (template_id, exercise_id, order_position) => {
