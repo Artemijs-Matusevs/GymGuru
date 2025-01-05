@@ -242,6 +242,17 @@ const addCompletedSet = async(exercise_id, progress_id, set_number, weight, reps
     //ADD NEW SETS HERE
 }
 
+//Delete workout in progress
+const deleteCurrentWorkout = async(progress_id) => {
+    try{
+        const result = await db.query(`
+                                        DELETE FROM in_progress_workouts
+                                        WHERE progress_id = $1`, [progress_id]);
+    }catch(err){
+        console.log("Error deleting current workout", err);
+    }
+}
+
 //exports
 export default{
     getAllExercises,
@@ -262,4 +273,5 @@ export default{
     getTemplateProgressId,
     getTemplateName,
     getCompletedSets,
+    deleteCurrentWorkout,
 }

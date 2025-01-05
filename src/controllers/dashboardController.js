@@ -143,6 +143,22 @@ const dashboardController = {
     updateCurrentWorkout: async (req, res) => {
         //UPDATE THE IN PROGRESS WORKOUT HERE
     },
+
+    //Cancel workout
+    cancelCurrentWorkout: async (req, res) => {
+        //Get the progress ID
+        const progressId = req.query.progress_id;
+
+        //Delete the entry in DB
+        workoutModel.deleteCurrentWorkout(progressId);
+
+        //Reset progressID in session
+        req.session.progressId = null;
+        req.session.alertMessage = `Workout with ID:${progressId}, cancelled`;
+
+        //Redirect
+        res.status(200).json({redirectUrl: `/dashboard`});
+    }
 }
 
 
