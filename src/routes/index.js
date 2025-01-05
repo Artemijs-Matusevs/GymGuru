@@ -5,7 +5,12 @@ import authController from '../controllers/authController.js';
 const router = express.Router();
 
 router.get('/', (req, res) =>{
-    res.render('index.ejs');
+    //Ceck if a user is logged in
+    if(req.user){
+        res.redirect("/dashboard");
+    }else{
+        res.render('index.ejs');
+    }
 });
 
 export default router;

@@ -4,18 +4,24 @@ import workoutModel from '../models/workoutModel.js';
 const dashboardController = {
 
     dashboard: (req, res) => {
-        //Get name and current date
-        let name = req.user.full_name;
-        let date = new Date();
-        let month = dashboardService.getMonthText(date.getMonth());
-        let message = dashboardService.getWelcomeMessage(date.getHours());
+        if(!req.session.progressId){
+            //Get name and current date
+            let name = req.user.full_name;
+            let date = new Date();
+            let month = dashboardService.getMonthText(date.getMonth());
+            let message = dashboardService.getWelcomeMessage(date.getHours());
 
-        //Get hold if alert message if any
-        let alertMessage = req.session.alertMessage;
-        req.session.alertMessage = null;//Clear it
+            //Get hold if alert message if any
+            let alertMessage = req.session.alertMessage;
+            req.session.alertMessage = null;//Clear it
 
-        res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month, message: message, alertMessage: alertMessage});
+            res.render("dashboard.ejs", {name: name, date: date.getDate(), month: month, message: message, alertMessage: alertMessage});
+        }else{
+            res.redirect(`/get-workout?progress_id=${req.session.progressId}`);
+        }
+
     },
+
 
     dashboardMain: (req, res) => {
         res.render("dashboard-main.ejs");
@@ -100,6 +106,10 @@ const dashboardController = {
         //Start a new workout
         const progress_id = await workoutModel.startWorkout(userId, templateId);
 
+        //Set up a new workout in the session
+        req.session.progressId = progress_id;
+        //console.log(req.session);
+
         //Redirect
         res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`});
 
@@ -118,7 +128,7 @@ const dashboardController = {
         //Get the raw original template
         let templateName = await workoutModel.getTemplateName(templateId);
         let rawTemplate = await dashboardService.getTemplate(templateId);
-        console.log(rawTemplate[0].sets);
+        //console.log(rawTemplate[0].sets);
 
         //Get any completed sets
         let completedSets = await workoutModel.getCompletedSets(progressId);
@@ -132,7 +142,7 @@ const dashboardController = {
     //Update workout state
     updateCurrentWorkout: async (req, res) => {
         //UPDATE THE IN PROGRESS WORKOUT HERE
-    }
+    },
 }
 
 

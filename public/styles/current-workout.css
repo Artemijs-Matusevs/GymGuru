@@ -39,3 +39,30 @@
     color: black;
     margin: auto;
 }
+
+/* Box buttons */
+.box-buttons-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 50px;
+}
+
+.box-button{
+    width: 150px;
+    height: 50px;
+    background-color: #23201E;
+    color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.box-button:hover{
+    color:#23201E;
+    background-color:#efc918;
+    cursor: pointer;
+}
