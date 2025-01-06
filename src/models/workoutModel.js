@@ -80,7 +80,8 @@ const deleteAllExercises = async(template_id) => {
 const deleteTemplate = async(template_id) => {
     try{
         const result = await db.query(`
-                                        DELETE FROM workout_templates
+                                        UPDATE workout_templates
+                                        SET deleted = TRUE
                                         WHERE template_id = $1
                                         RETURNING template_name`, [template_id]);
         return result.rows[0].template_name;
@@ -108,7 +109,7 @@ const fetchUserTemplates = async(user_id) => {
         const result = await db.query(`
                                         SELECT *
                                         FROM workout_templates
-                                        WHERE user_id = $1
+                                        WHERE user_id = $1 AND deleted = FALSE
                                         ORDER BY template_name ASC`, [user_id]);
         return result.rows;
     }catch(err){
@@ -187,17 +188,6 @@ const startWorkout = async(user_id, template_id) => {
     }
 }
 
-//Add a completed set
-const finishSet = async(template_exercise_id, progress_id, set_number, weight, reps) => {
-    try{
-        const result = await db.query(`
-                                        INSERT INTO exercise_history_sets
-                                        VALUES ($1, $2, $3, $4, $5)` [template_exercise_id, progress_id, set_number, weight, reps]);                             
-    }catch(err){
-        console.log(`Error adding a finished set: ${err.message}`);
-    }
-}
-
 //Get the template ID from the progress workouts
 const getTemplateProgressId = async(progress_id) => {
     try{
@@ -237,10 +227,19 @@ const getCompletedSets = async(progress_id) => {
     }
 }
 
-//Add new completed set
-const addCompletedSet = async(exercise_id, progress_id, set_number, weight, reps) =>{
-    //ADD NEW SETS HERE
+//Add new started set to history table
+const addStartedSet = async(exercise_id, progress_id, set_number, weight, reps) => {
+    try{
+        const result = await db.query(`
+                                        INSERT INTO exercise_history_sets (exercise_id, progress_id, set_number, weight, reps)
+                                        VALUES ($1, $2, $3, $4, $5)`, [exercise_id, progress_id, set_number, weight, reps]);
+    }catch(err){
+        console.log(`Failed to add a new set to the sets history table: ${err.message}`);
+    }
 }
+
+
+
 
 //Delete workout in progress
 const deleteCurrentWorkout = async(progress_id) => {
@@ -269,9 +268,9 @@ export default{
     updateTemplateName,
     deleteExercise,
     startWorkout,
-    finishSet,
     getTemplateProgressId,
     getTemplateName,
     getCompletedSets,
     deleteCurrentWorkout,
+    addStartedSet,
 }

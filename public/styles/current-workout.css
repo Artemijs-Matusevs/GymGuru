@@ -1,8 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 75vw;
+    gap: 25px;
+    padding: 50px 0;
+}
+
+.subtitle{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
 /* Exercise table */
 .exercise-table{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
-    gap: 10px;
     width: 100%;
     background-color: #f2f2f2;
     padding: 10px;
@@ -16,6 +44,7 @@
 
 .table-row{
     display: contents;
+      
 }
 
 .header {
@@ -28,12 +57,14 @@
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid #ddd;
+    height: 6vh;
 }
 
 .cell input[type="number"]{
-    width: 100%;
+    width: 50%;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: none;
+    background-color: transparent;
     border-radius: 4px;
     text-align: center;
     color: black;
@@ -65,4 +96,17 @@
     color:#23201E;
     background-color:#efc918;
     cursor: pointer;
+}
+
+/* Outline buttons */
+.outline-button{
+    font-size: 40px;
+    background-color: #23201E;
+    color: #f2f2f2;
+}
+
+.outline-button:hover{
+    cursor: pointer;
+    color:#23201E;
+    background-color:#efc918;
 }

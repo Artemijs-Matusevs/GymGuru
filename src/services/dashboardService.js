@@ -161,7 +161,7 @@ const deleteTemplate = async (templateId) => {
         }
 
         //Delete all exercises for the template
-        await workoutModel.deleteAllExercises(templateId);
+        //await workoutModel.deleteAllExercises(templateId);
 
         //Delete the template and return its name
         const templateName = await workoutModel.deleteTemplate(templateId);
@@ -260,9 +260,24 @@ const getTemplate = async (template_id) => {
     return templateData;
 };
 
-//Function to replace raw template sets with comleted sets
-const replaceSets = async(rawTemplate, newSets) => {
-    
+//Function to start a new workout
+const startWorkout = async (userId, templateId) => {
+    //Start the workout
+    const progressId = await workoutModel.startWorkout(userId, templateId);
+
+    //Get the raw template
+    const rawTemplate = await getTemplate(templateId);
+
+    //Loop through each exercise and their sets
+    rawTemplate.forEach(exercise => {
+        //Loop through each set of the exercise
+        exercise.sets.map(async (set) => {
+            await workoutModel.addStartedSet(set.template_exercise_id, 73, set.set_number, set.weight, set.reps);
+        });
+    })
+
+    //Return the progress Id
+    return progressId;
 }
 
 //NOT EXPORTS
@@ -291,4 +306,5 @@ export default{
     deleteTemplate,
     getTemplate,
     updateTemplate,
+    startWorkout,
 }

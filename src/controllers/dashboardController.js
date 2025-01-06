@@ -104,16 +104,14 @@ const dashboardController = {
         const userId = req.user.id;
 
         //Start a new workout
-        const progress_id = await workoutModel.startWorkout(userId, templateId);
+        const progress_id = await dashboardService.startWorkout(userId, templateId);
 
         //Set up a new workout in the session
         req.session.progressId = progress_id;
-        //console.log(req.session);
 
         //Redirect
         res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`});
 
-        //console.log(` template ID: ${templateId}, User Id: ${userId}`);
     },
 
     //GET current workout
@@ -123,7 +121,6 @@ const dashboardController = {
         const progressId = req.query.progress_id;
         const templateId = await workoutModel.getTemplateProgressId(progressId);
 
-        //console.log(` template ID: ${templateId}, Progress Id: ${progressId}`);
 
         //Get the raw original template
         let templateName = await workoutModel.getTemplateName(templateId);
