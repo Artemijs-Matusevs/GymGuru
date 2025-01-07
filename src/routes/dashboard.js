@@ -2,6 +2,14 @@
 import express from 'express';
 import dashboardController from '../controllers/dashboardController.js';
 import authController from '../controllers/authController.js';
+import rateLimit from "express-rate-limit";
+
+//Rate limiter updating current workout
+const updateWorkoutLimiter = rateLimit({
+    windowMs: 1 * 1000,
+    max: 1, //5 requests per 10 second window
+    message: "Too many requests, try again later",
+});
 
 const router = express.Router();
 
@@ -35,6 +43,6 @@ router.get('/get-workout', authController.isAuthenticated, dashboardController.g
 router.delete('/cancel-workout', authController.isAuthenticated, dashboardController.cancelCurrentWorkout);
 
 //Update workout
-router.post('/update-workout', authController.isAuthenticated, dashboardController.updateCurrentWorkout);
+router.post('/update-workout', authController.isAuthenticated, updateWorkoutLimiter, dashboardController.updateCurrentWorkout);
 
 export default router;
