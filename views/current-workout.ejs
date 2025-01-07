@@ -33,7 +33,7 @@
                     </div>
 
                     <% exercise.sets.forEach(set => { %>
-                        <div class="table-row exercise-set">
+                        <div set-id="<%=set.set_id%>" set-status="<%=set.completed%>" class="table-row exercise-set">
                             <div class="cell exercise-set-number"><%=set.set_number%></div>
                             <div class="cell exercise-set-number"></div>
                             <div class="cell"><input class="exercise-current-weight" placeholder="kg" value="<%=set.weight%>" type="number"></div>

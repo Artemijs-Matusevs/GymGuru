@@ -126,7 +126,10 @@ const dashboardController = {
 
     //Update workout state
     updateCurrentWorkout: async (req, res) => {
-        //UPDATE THE IN PROGRESS WORKOUT HERE
+        //Get the set details
+        const setId = req.body.set_id;
+
+        console.log(setId);
     },
 
     //Cancel workout
