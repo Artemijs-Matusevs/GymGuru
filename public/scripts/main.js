@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(html => {
                 content.innerHTML = html;
                 if(page === "workout"){
-                    workoutPartial();
+                    workoutLoaded();
                 }
             })
             .catch(err => console.error('Error loading page:', err));
