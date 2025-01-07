@@ -189,7 +189,7 @@ const startWorkout = async(user_id, template_id) => {
 }
 
 //Get the template ID from the progress workouts
-const getTemplateProgressId = async(progress_id) => {
+const getTemplateId = async(progress_id) => {
     try{
         const result = await db.query(`
                                         SELECT template_id
@@ -215,12 +215,12 @@ const getTemplateName = async(template_id) => {
 }
 
 //Get completed sets
-const getCompletedSets = async(progress_id) => {
+const getCompletedSets = async(progress_id, exercise_id) => {
     try{
         const result = await db.query(`
-                                        SELECT *
+                                        SELECT set_id, set_number, weight, reps, completed
                                         FROM exercise_history_sets
-                                        WHERE progress_id = $1`, [progress_id]);
+                                        WHERE progress_id = $1 AND exercise_id = $2`, [progress_id, exercise_id]);
         return result.rows;
     }catch(err){
         console.log(`Error, could fetch all compelted sets: ${err.message}`);
@@ -268,7 +268,7 @@ export default{
     updateTemplateName,
     deleteExercise,
     startWorkout,
-    getTemplateProgressId,
+    getTemplateId,
     getTemplateName,
     getCompletedSets,
     deleteCurrentWorkout,

@@ -281,6 +281,17 @@ const startWorkout = async (userId, templateId) => {
 }
 
 //Function to get in progress workout
+const getCurrentWorkout = async (progressId) => {
+    const templateId = await workoutModel.getTemplateId(progressId);
+    let template = await getTemplate(templateId);
+    const templateName = await workoutModel.getTemplateName(templateId);
+
+    for (const exercise of template) {
+        exercise.sets = await workoutModel.getCompletedSets(progressId, exercise.exercise_id);
+    }
+
+    return {template, templateName};
+}
 
 //NOT EXPORTS
 //Insert new exercise
@@ -309,4 +320,5 @@ export default{
     getTemplate,
     updateTemplate,
     startWorkout,
+    getCurrentWorkout
 }

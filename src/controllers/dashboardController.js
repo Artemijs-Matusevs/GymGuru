@@ -116,22 +116,12 @@ const dashboardController = {
     //GET current workout
     getCurrentWorkout: async (req, res) => {
 
-        //Get the in progress workout and template IDs
+        //Get the in progress workout;
         const progressId = req.query.progress_id;
-        const templateId = await workoutModel.getTemplateProgressId(progressId);
-
-        //Get the raw original template
-        let templateName = await workoutModel.getTemplateName(templateId);
-        let rawTemplate = await dashboardService.getTemplate(templateId);
-        //console.log(rawTemplate[0].sets);
-
-        //Get any completed sets
-        let completedSets = await workoutModel.getCompletedSets(progressId);
-
-        //Replace any completed sets in the raw template
+        const workout = await dashboardService.getCurrentWorkout(progressId);
 
         //Render the workout
-        res.render("current-workout.ejs", {templateName: templateName, template: rawTemplate});
+        res.render("current-workout.ejs", {templateName: workout.templateName, template: workout.template});
     },
 
     //Update workout state
