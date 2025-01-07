@@ -170,6 +170,7 @@ function workoutPartial(){
 
     //Edit saved template
     $(document).on("click", ".edit-workout-button", function() {
+        $("#template-exercise-list").empty();
 
         //Get parent container and template name
         const parentContainer = $(this).closest(".saved-template");
