@@ -272,13 +272,15 @@ const startWorkout = async (userId, templateId) => {
     rawTemplate.forEach(exercise => {
         //Loop through each set of the exercise
         exercise.sets.map(async (set) => {
-            await workoutModel.addStartedSet(set.template_exercise_id, 73, set.set_number, set.weight, set.reps);
+            await workoutModel.addStartedSet(set.template_exercise_id, progressId, set.set_number, set.weight, set.reps);
         });
     })
 
     //Return the progress Id
     return progressId;
 }
+
+//Function to get in progress workout
 
 //NOT EXPORTS
 //Insert new exercise

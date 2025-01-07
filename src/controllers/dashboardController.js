@@ -111,7 +111,6 @@ const dashboardController = {
 
         //Redirect
         res.status(200).json({redirectUrl: `/get-workout?progress_id=${progress_id}`});
-
     },
 
     //GET current workout
@@ -120,7 +119,6 @@ const dashboardController = {
         //Get the in progress workout and template IDs
         const progressId = req.query.progress_id;
         const templateId = await workoutModel.getTemplateProgressId(progressId);
-
 
         //Get the raw original template
         let templateName = await workoutModel.getTemplateName(templateId);
@@ -151,7 +149,7 @@ const dashboardController = {
 
         //Reset progressID in session
         req.session.progressId = null;
-        req.session.alertMessage = `Workout with ID:${progressId}, cancelled`;
+        req.session.alertMessage = `Workout cancelled`;
 
         //Redirect
         res.status(200).json({redirectUrl: `/dashboard`});
